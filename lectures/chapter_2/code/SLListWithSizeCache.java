@@ -1,5 +1,5 @@
-public class SLList {
-
+public class SLListWithSizeCache {
+    
     /**
      * Nested class: IntNode representing each element in a linked-list
      */
@@ -15,9 +15,19 @@ public class SLList {
 
     /*================================= Implementation of SLList /*=================================*/
     private IntNode first;
+    private int size;
 
-    public SLList(int x) {
+    public SLListWithSizeCache(int x) {
         first = new IntNode(x, null);
+        size = 1;
+    }
+
+    /**
+     * Initialize an empty list
+     */
+    public SLListWithSizeCache() {
+        first = null;
+        size = 0;
     }
 
     /**
@@ -26,13 +36,18 @@ public class SLList {
      */
     public void addFirst(int x) {
         first = new IntNode(x, first);
+        size += 1;
     }
 
     /**
      * 
-     * @return
+     * @return -1 if the list is empty otherwise return the first item
      */
     public int getFirst() {
+        // return first.item;
+        if (first == null)
+            return -1;
+        
         return first.item;
     }
 
@@ -44,13 +59,13 @@ public class SLList {
      * Iterative Implementation
      * @param x
      */
-
     public void addLast(int x) {
         IntNode p = first;
         while (p.next != null)
             p = p.next;
         
         p.next = new IntNode(x, null);
+        size += 1;
     }
 
     /**
@@ -67,45 +82,15 @@ public class SLList {
 
     public void addLastRecursively(int x) {
         addLastNode(first, x);
+        size += 1;
     }
 
-    /**
-     * Helper method to get the number of nodes in the SLList
-     * @return
-     */
-    private int countNode(IntNode start) {
-        if (start == null)
-            return 1;
-        
-        return 1 + countNode(start.next);
-    }
-
-    /**
-     * Recursive Implementation
-     * TODO: Move the helper method in the size() with lambda functions (closure is the king)
-     * @return
-     */
     public int size() {
-        return countNode(first);
-    }
-
-    /**
-     * 
-     * @return
-     */
-    public int sizeIterative() {
-        int size = 0;
-        IntNode p = first;
-        while (p != null) {
-            size += 1;
-            p = p.next;
-        }
-
         return size;
     }
 
     public static void main(String[] args) {
-        SLList list = new SLList(0);
+        SLListWithSizeCache list = new SLListWithSizeCache(0);
         assert(list.size() == 1);
         for (int i = 1; i <= 10; ++i) {
             list.addFirst(i);
@@ -113,7 +98,7 @@ public class SLList {
             System.out.println("Element at the index of " + i + " is " + list.getFirst());
         }
 
-        SLList list1 = new SLList(0);
+        SLListWithSizeCache list1 = new SLListWithSizeCache(0);
         assert(list1.size() == 1);
         for (int i = 1; i <= 10; ++i) {
             list1.addLast(i);
@@ -121,7 +106,7 @@ public class SLList {
             //TODO implement method used to get the last element and add test case here
         }
 
-        SLList list2 = new SLList(0);
+        SLListWithSizeCache list2 = new SLListWithSizeCache(0);
         assert(list1.size() == 1);
         for (int i = 1; i <= 10; ++i) {
             list1.addLastRecursively(i);
