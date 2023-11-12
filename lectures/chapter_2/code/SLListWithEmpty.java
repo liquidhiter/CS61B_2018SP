@@ -56,10 +56,50 @@ public class SLListWithEmpty {
     }
 
     /**
+     * Linear time
+     * @param x
+     * @return
+     */
+    private IntNode findithNode(int x) {
+        // Argument check
+        if ((x < 0) || (x >= size))
+            throw new IndexOutOfBoundsException();
+        
+        IntNode p = this.first;
+        while(x-- > 0)
+            p = p.next;
+        
+        return p;
+
+        // if (x == 0)
+        //     return node;
+        
+        // return findithNode(node.next, x-1);
+    }
+
+    /**
      * 
      * @return
      */
-    public boolean inEmpty() {
+    public int getLast() {
+        if (first == null)
+            return -1;
+        
+        // return findithNode(size - 1).item;
+        
+        // Worth of checking the last node is non-null ?
+        IntNode last = findithNode(size - 1);
+        assert(last != null);
+        
+        return last.item;
+    }
+
+
+    /**
+     * 
+     * @return
+     */
+    public boolean isEmpty() {
         return size() == 0;
     }
 
@@ -139,7 +179,7 @@ public class SLListWithEmpty {
         for (int i = 1; i <= 10; ++i) {
             list1.addLast(i);
             assert(list.size() == i + 1);
-            //TODO implement method used to get the last element and add test case here
+            assert(list1.getLast() == i);
         }
 
         SLListWithEmpty list2 = new SLListWithEmpty(0);
@@ -147,18 +187,25 @@ public class SLListWithEmpty {
         for (int i = 1; i <= 10; ++i) {
             list1.addLastRecursively(i);
             assert(list.size() == i + 1);
-            //TODO implement method used to get the last element and add test case here
+            assert(list1.getLast() == i);
         }
 
         // Test empty list
         SLListWithEmpty emptyList = new SLListWithEmpty();
         assert(emptyList.size() == 0);
-        assert(emptyList.inEmpty() == true);
+        assert(emptyList.isEmpty() == true);
         for (int i = 0; i < 10; ++i) {
             emptyList.addFirst(i);
             assert(emptyList.getFirst() == i);
             assert(emptyList.size() == i + 1);
-            assert(emptyList.inEmpty() == false);
+            assert(emptyList.isEmpty() == false);
+        }
+
+        for (int i = 11; i < 30; ++i) {
+            emptyList.addLast(i);
+            assert(emptyList.size() == i);
+            assert(emptyList.isEmpty() == false);
+            assert(emptyList.getLast() == i) : "Expected last element " + i + " but found " + emptyList.getLast();
         }
     }
 }
