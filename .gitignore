@@ -48,3 +48,8 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 *.lnk
+*.jar
+out/
+*.iml
+.idea/
+*.class
