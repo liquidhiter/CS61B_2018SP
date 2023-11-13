@@ -1,4 +1,4 @@
-public class DLList {
+public class DLListWithLookingBack {
     private static class IntNode {
         public IntNode prev;
         public int item;
@@ -20,7 +20,7 @@ public class DLList {
      * 
      * @param x
      */
-    public DLList(int x) {
+    public DLListWithLookingBack(int x) {
         sentinel = new IntNode(null, 63, null);
         IntNode first = new IntNode(null, x, null);
         sentinel.next = first;
@@ -32,7 +32,7 @@ public class DLList {
     /**
      * Returns an empty list
      */
-    public DLList() {
+    public DLListWithLookingBack() {
         sentinel = new IntNode(null, 63, null);
         last = sentinel;
         size = 0;
@@ -146,7 +146,7 @@ public class DLList {
 
     public static void testLastMethods() {
         // Basic tests of empty list
-        DLList emptyList = new DLList();
+        DLListWithLookingBack emptyList = new DLListWithLookingBack();
         assert(emptyList.size() == 0);
         assert(emptyList.isEmpty() == true);
 
@@ -171,7 +171,7 @@ public class DLList {
         assert(emptyList.isEmpty() == false);
 
         // Basic tests of non-empty list
-        DLList list = new DLList(0);
+        DLListWithLookingBack list = new DLListWithLookingBack(0);
         assert(list.size() == 1);
         assert(list.isEmpty() == false);
         assert(list.getLast() == 0);
@@ -196,7 +196,7 @@ public class DLList {
 
     public static void testFirstMethods() {
         // Basic tests of empty lists
-        DLList emptyList = new DLList();
+        DLListWithLookingBack emptyList = new DLListWithLookingBack();
         assert(emptyList.size() == 0);
         assert(emptyList.isEmpty());
         for (int i = 1; i <= 10; ++i) {
