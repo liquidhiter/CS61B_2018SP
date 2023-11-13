@@ -111,13 +111,43 @@ public class DLList {
             emptyList.addLast(i);
             assert(emptyList.size() == i + 1);
             assert(emptyList.getLast() == i);
+            // System.out.println("Last element is " + emptyList.getLast());
         }
+        assert(emptyList.size() == len);
+        assert(emptyList.getLast() == len - 1);
+        assert(emptyList.isEmpty() == false);
+
+        for (int i = 9; i >= 0; --i) {
+            assert(emptyList.getLast() == i);
+            emptyList.removeLast();
+            assert(emptyList.size() == i);
+            assert(emptyList.getLast() == i - 1);
+        }
+        assert(emptyList.size() == 0);
+        assert(emptyList.isEmpty() == false);
 
         // Basic tests of non-empty list
         DLList list = new DLList(0);
         assert(list.size() == 1);
         assert(list.isEmpty() == false);
         assert(list.getLast() == 0);
+        for (int i = 1; i < len; ++i) {
+            list.addLast(i);
+            assert(list.size() == i + 1);
+            assert(list.getLast() == i);
+        }
+        assert(list.size() == len);
+        assert(list.isEmpty() == false);
+        assert(list.getLast() == 9);
+
+        for (int i = 9; i >= 0; --i) {
+            assert(list.getLast() == i);
+            list.removeLast();
+            assert(list.size() == i);
+            assert(list.getLast() == i - 1);
+        }
+        assert(list.size() == 0);
+        assert(list.isEmpty() == false);
     }
 
 }
