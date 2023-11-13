@@ -39,6 +39,51 @@ public class DLList {
     }
 
     /**
+     * Add a new element in front of the list
+     * @param x
+     */
+    public void addFirst(int x) {
+        IntNode newNode = new IntNode(null, x, null);
+        newNode.next = sentinel.next;
+        newNode.prev = sentinel;
+        sentinel.next = newNode;
+        if (isEmpty())
+            last = newNode;
+        
+        size += 1;
+    }
+
+    /**
+     * Returns the first element's value
+     */
+    public int getFirst() {
+        if (isEmpty())
+            throw new RuntimeException("Empty list");
+        
+        return sentinel.next.item;
+    }
+    
+    /**
+     * Removes the first element
+     */
+    public void removeFirst() {
+        if (isEmpty())
+            throw new RuntimeException("Empty list");
+        
+        // Remove the first element from the list
+        IntNode first = sentinel.next;
+        sentinel.next = first.next;
+        first.prev = null;
+        first.next = null;
+
+        size -= 1;
+
+        // Corner case: one element list, and last needs to point to the sentinel node
+        if (isEmpty())
+            last = sentinel;
+    }
+
+    /**
      * 
      * @param x
      */
@@ -98,9 +143,8 @@ public class DLList {
         last = secondToLast;
         size -= 1;
     }
-    
-    public static void main(String[] args) {
 
+    public static void testLastMethods() {
         // Basic tests of empty list
         DLList emptyList = new DLList();
         assert(emptyList.size() == 0);
@@ -148,6 +192,45 @@ public class DLList {
         }
         assert(list.size() == 0);
         assert(list.isEmpty() == false);
+    }
+
+    public static void testFirstMethods() {
+        // Basic tests of empty lists
+        DLList emptyList = new DLList();
+        assert(emptyList.size() == 0);
+        assert(emptyList.isEmpty());
+        for (int i = 1; i <= 10; ++i) {
+            emptyList.addFirst(i);
+            assert(emptyList.size() == i);
+            assert(emptyList.getFirst() == i);
+            assert(emptyList.getLast() == i);
+        }
+        assert(emptyList.size() == 10);
+        assert(emptyList.isEmpty() == false);
+        assert(emptyList.getFirst() == 1);
+        assert(emptyList.getLast() == 10);
+
+        for (int i = 1; i <= 10; ++i) {
+            assert(emptyList.getFirst() == i);
+            assert(emptyList.size() == 11 - i);
+            emptyList.removeFirst();
+            assert(emptyList.getFirst() == i + 1);
+            assert(emptyList.size() == 10 - i);
+        }
+        assert(emptyList.size() == 0);
+        assert(emptyList.isEmpty() == true);
+
+        //TDOO: I am lazy to add more test cases ...
+    }
+
+    public static void testMixMethods() {
+        throw new RuntimeException("Not implemented");
+    }
+    
+    public static void main(String[] args) {
+        testLastMethods();
+        testFirstMethods();
+        // testMixMethods();
     }
 
 }
