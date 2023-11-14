@@ -66,6 +66,61 @@ public class IntList {
 		return L;
     }
 
+    /**
+     * Recursive implementation and non-mutative
+     */
+    public static IntList square(IntList L) {
+        if (L == null)
+            return null;
+        
+        IntList newList = new IntList(L.first * L.first, null);
+        newList.rest = square(L.rest);
+        return newList;
+    }
+
+    /**
+     * Iterative implementation and non-mutative
+     */
+    public static IntList squareIterative(IntList L) {
+        IntList newList = new IntList(L.first * L.first , null);
+        IntList retList = newList;
+        IntList p = L.rest;
+        while (p != null) {
+            newList.rest = new IntList(p.first * p.first, null);
+            newList = newList.rest;
+            p = p.rest;
+        }
+
+        return retList;
+    }
+
+    /**
+     * Iterative and mutative implementation
+     */
+    public static IntList squareMutativeIterative(IntList L) {
+        IntList p = L;
+        while (p != null) {
+            p.first *= p.first;
+            p = p.rest;
+        }
+
+        return L;
+    }
+
+    /**
+     * Recursive and mutative
+     */
+    public static IntList squareMutative(IntList L) {
+        // dummy return due to the function prototype
+        if (L == null)
+            return null;
+        
+        L.first *= L.first;
+        squareMutative(L.rest);
+        
+        return L;
+    }
+
 
     public static void main(String[] args) {
         // IntList L = new IntList(15, null);
@@ -87,12 +142,14 @@ public class IntList {
         // System.out.println(L.get(1));
 //        System.out.println(incrList(L, 3));
 //        System.out.println(dincrList(L, 3));
-        IntList pL = L;
-        IntList incrListRet = incrList(L, 3);
-        while (pL != null) {
-            assert (pL.first == incrListRet.first + 3);
-            pL = pL.rest;
-            incrListRet = incrListRet.rest;
-        }
+        // IntList pL = L;
+        // IntList incrListRet = incrList(L, 3);
+        // while (pL != null) {
+        //     assert (pL.first == incrListRet.first + 3);
+        //     pL = pL.rest;
+        //     incrListRet = incrListRet.rest;
+        // }
+
+        IntList squareOfL = squareIterative(L);
     }
 }
