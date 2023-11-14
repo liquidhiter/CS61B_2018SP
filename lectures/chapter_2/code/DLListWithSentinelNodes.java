@@ -124,6 +124,24 @@ public class DLListWithSentinelNodes {
         size -= 1;
     }
 
+    /**
+     * @mutator
+     * @param x
+     */
+    public void addLast(int x) {
+        IntNode newNode = new IntNode(null, x, null);
+        newNode.next = tail;
+        newNode.prev = tail.prev;
+        tail.prev = newNode;
+
+        // Head needs to point to the new node if it was empty
+        //! Special case can't be avoided
+        if (isEmpty())
+            head.next = newNode;
+
+        size += 1;
+    }
+
 
     public static void main(String[] args) {
 
@@ -141,6 +159,10 @@ public class DLListWithSentinelNodes {
         assert(list.size() == 1);
         assert(list.getFirst() == -10);
         assert(list.getLast() == -10);
+        list.addLast(-11);
+        assert(list.size() == 2);
+        assert(list.getFirst() == -10);
+        assert(list.getLast() == -11);
 
         // Basic Tests of empty list
         DLListWithSentinelNodes emptyList = new DLListWithSentinelNodes();
@@ -158,5 +180,10 @@ public class DLListWithSentinelNodes {
         assert(emptyList.isEmpty() == true);
         // emptyList.getFirst();
         // emptyList.getLast();
+        emptyList.addLast(-11);
+        assert(emptyList.size() == 1);
+        assert(emptyList.isEmpty() == false);
+        assert(emptyList.getFirst() == -11);
+        assert(emptyList.getLast() == -11);
     }
 }
