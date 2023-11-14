@@ -1,5 +1,4 @@
 public class DLListWithCircularSentinel {
-    
     private static class IntNode {
         private IntNode prev;
         private int item;
@@ -38,7 +37,7 @@ public class DLListWithCircularSentinel {
     }
 
     /**
-     * 
+     *
      * @return
      */
     public int size() {
@@ -46,7 +45,7 @@ public class DLListWithCircularSentinel {
     }
 
     /**
-     * 
+     *
      * @return
      */
     public boolean isEmpty() {
@@ -54,46 +53,47 @@ public class DLListWithCircularSentinel {
     }
 
     /**
-     * 
+     *
      * @return
      */
     public int getFirst() {
         if (isEmpty())
             throw new RuntimeException("Empty list");
-        
+
         return sentinel.next.item;
     }
 
     /**
-     * 
+     *
      * @return
      */
     public int getLast() {
         if (isEmpty())
             throw new RuntimeException("Empty list");
-        
+
         return sentinel.prev.item;
     }
 
     /**
-     * 
+     *
      * @param x
      */
     public void addFirst(int x) {
         IntNode newNode = new IntNode(null, x, null);
         newNode.prev = sentinel;
         newNode.next = sentinel.next;
+        sentinel.next.prev = newNode;
         sentinel.next = newNode;
 
         if (isEmpty())
             // sentinel.prev keeps tracking the last node which needs update for empty list
             sentinel.prev = newNode;
-        
+
         size += 1;
     }
 
     /**
-     * 
+     *
      */
     public void removeFirst() {
         if (isEmpty())
@@ -107,29 +107,30 @@ public class DLListWithCircularSentinel {
     }
 
     /**
-     * 
+     *
      * @param x
      */
     public void addLast(int x) {
         IntNode newNode = new IntNode(null, x, null);
         newNode.next = sentinel;
         newNode.prev = sentinel.prev;
+        sentinel.prev.next = newNode;
         sentinel.prev = newNode;
 
         if (isEmpty())
             // sentinel.next keeps tracking the first node which needs update for empty list
             sentinel.next = newNode;
-        
+
         size += 1;
     }
 
     /**
-     * 
+     *
      */
     public void removeLast() {
         if (isEmpty())
             throw new RuntimeException("Empty list");
-        
+
         IntNode last = sentinel.prev;
         last.prev.next = sentinel;
         sentinel.prev = last.prev;

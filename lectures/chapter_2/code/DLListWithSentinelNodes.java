@@ -91,6 +91,7 @@ public class DLListWithSentinelNodes {
         IntNode newNode = new IntNode(null, x, null);
         newNode.prev = head;
         newNode.next = head.next;
+        head.next.prev = newNode;
         head.next = newNode;
 
         // Tail needs to point to the new node if it was empty
@@ -126,6 +127,7 @@ public class DLListWithSentinelNodes {
         IntNode newNode = new IntNode(null, x, null);
         newNode.next = tail;
         newNode.prev = tail.prev;
+        tail.prev.next = newNode;
         tail.prev = newNode;
 
         // Head needs to point to the new node if it was empty

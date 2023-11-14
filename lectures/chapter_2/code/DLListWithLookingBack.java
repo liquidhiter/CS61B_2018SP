@@ -17,7 +17,7 @@ public class DLListWithLookingBack {
     private int size;
 
     /**
-     * 
+     *
      * @param x
      */
     public DLListWithLookingBack(int x) {
@@ -44,12 +44,13 @@ public class DLListWithLookingBack {
      */
     public void addFirst(int x) {
         IntNode newNode = new IntNode(null, x, null);
-        newNode.next = sentinel.next;
         newNode.prev = sentinel;
+        newNode.next = sentinel.next;
+        if (!isEmpty())
+            sentinel.next.prev = newNode;
         sentinel.next = newNode;
         if (isEmpty())
             last = newNode;
-        
         size += 1;
     }
 
@@ -59,39 +60,36 @@ public class DLListWithLookingBack {
     public int getFirst() {
         if (isEmpty())
             throw new RuntimeException("Empty list");
-        
+
         return sentinel.next.item;
     }
-    
+
     /**
      * Removes the first element
      */
     public void removeFirst() {
         if (isEmpty())
             throw new RuntimeException("Empty list");
-        
+
         // Remove the first element from the list
         IntNode first = sentinel.next;
         sentinel.next = first.next;
-        first.prev = null;
-        first.next = null;
-
+        first = null;
         size -= 1;
-
         // Corner case: one element list, and last needs to point to the sentinel node
         if (isEmpty())
             last = sentinel;
     }
 
     /**
-     * 
+     *
      * @param x
      */
     public void addLast(int x) {
         IntNode newNode = new IntNode(null, x, null);
         if (isEmpty())
             sentinel.next = newNode;
-        
+
         newNode.prev = last;
         last.next = newNode;
         last = newNode;
@@ -99,7 +97,7 @@ public class DLListWithLookingBack {
     }
 
     /**
-     * 
+     *
      * @return
      */
     public int size() {
@@ -107,7 +105,7 @@ public class DLListWithLookingBack {
     }
 
     /**
-     * 
+     *
      * @return
      */
     public boolean isEmpty() {
@@ -115,7 +113,7 @@ public class DLListWithLookingBack {
     }
 
     /**
-     * 
+     *
      * @return
      */
     public int getLast() {
@@ -226,11 +224,14 @@ public class DLListWithLookingBack {
     public static void testMixMethods() {
         throw new RuntimeException("Not implemented");
     }
-    
+
     public static void main(String[] args) {
-        testLastMethods();
-        testFirstMethods();
+//        testLastMethods();
+//        testFirstMethods();
         // testMixMethods();
+        DLListWithLookingBack emptyList = new DLListWithLookingBack();
+        for (int i = 0; i < 10; ++i)
+            emptyList.addLast(i);
     }
 
 }
