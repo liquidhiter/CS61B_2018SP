@@ -73,6 +73,7 @@ public class DLListWithLookingBack {
 
         // Remove the first element from the list
         IntNode first = sentinel.next;
+        first.next.prev = sentinel;
         sentinel.next = first.next;
         first = null;
         size -= 1;
@@ -136,9 +137,11 @@ public class DLListWithLookingBack {
         if (isEmpty())
             throw new RuntimeException("Empty list!");
 
+        IntNode lastTmp = last;
         IntNode secondToLast = last.prev;
         secondToLast.next = null;
         last = secondToLast;
+        lastTmp = null;
         size -= 1;
     }
 
