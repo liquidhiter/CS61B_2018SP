@@ -1,12 +1,4 @@
-import javax.management.RuntimeErrorException;
-
 public class DLListWithSentinelNodes {
-
-    /**
-     * EmptyList Exception
-     */
-    private class EmptyListException extends Exception {
-    };
     
     /**
      * Nested class representing each node in the DLList
@@ -54,7 +46,7 @@ public class DLListWithSentinelNodes {
     }
 
     /**
-     * 
+     * Constant time
      * @return
      */
     public int size() {
@@ -62,7 +54,7 @@ public class DLListWithSentinelNodes {
     }
 
     /**
-     * 
+     * Constant time
      * @return
      */
     public boolean isEmpty() {
@@ -70,7 +62,7 @@ public class DLListWithSentinelNodes {
     }
 
     /**
-     * 
+     * Constant time
      * @return
      */
     public int getFirst() {
@@ -81,7 +73,7 @@ public class DLListWithSentinelNodes {
     }
 
     /**
-     * 
+     * Constant time
      * @return
      */
     public int getLast() {
@@ -92,7 +84,7 @@ public class DLListWithSentinelNodes {
     }
 
     /**
-     * 
+     * Constant time
      * @param x
      */
     public void addFirst(int x) {
@@ -110,6 +102,7 @@ public class DLListWithSentinelNodes {
     }
 
     /**
+     * Constant time
      * @mutator
      */
     public void removeFirst() {
@@ -125,6 +118,7 @@ public class DLListWithSentinelNodes {
     }
 
     /**
+     * Constant time
      * @mutator
      * @param x
      */
@@ -140,6 +134,19 @@ public class DLListWithSentinelNodes {
             head.next = newNode;
 
         size += 1;
+    }
+
+    /**
+     * Constant time
+     * @mutator
+     */
+    public void removeLast() {
+        IntNode last = tail.prev;
+        last.prev.next = tail;
+        tail.prev = last.prev;
+        // Better to inform GC to re-cycle the first ?
+        last = null;
+        size -= 1;
     }
 
 
@@ -163,6 +170,10 @@ public class DLListWithSentinelNodes {
         assert(list.size() == 2);
         assert(list.getFirst() == -10);
         assert(list.getLast() == -11);
+        list.removeLast();
+        assert(list.size() == 1);
+        assert(list.getFirst() == -10);
+        assert(list.getLast() == -10);
 
         // Basic Tests of empty list
         DLListWithSentinelNodes emptyList = new DLListWithSentinelNodes();
@@ -185,5 +196,10 @@ public class DLListWithSentinelNodes {
         assert(emptyList.isEmpty() == false);
         assert(emptyList.getFirst() == -11);
         assert(emptyList.getLast() == -11);
+        emptyList.removeLast();
+        assert(emptyList.size() == 0);
+        assert(emptyList.isEmpty() == true);
+        // emptyList.getFirst();
+        // emptyList.getLast();
     }
 }
