@@ -68,3 +68,68 @@ It actually makes sense because add the first element only makes change to the `
 - `DDList<T> list = new DLList<T>()`
 - generics only support reference types, so primitive types have to be used with `Integer`, `Double`, `Character`, etc.
 - **PENDING QUESTION**: which value should be used for sentinel as generic type is unknown? It seems that only `null` is usable?
+
+### Solution to extra tasks in discussion 2
+- recursive / non-mutative implementation
+```java
+    /**
+     * Recursive implementation and non-mutative
+     */
+    public static IntList square(IntList L) {
+        if (L == null)
+            return null;
+        
+        IntList newList = new IntList(L.first * L.first, null);
+        newList.rest = square(L.rest);
+        return newList;
+    }
+```
+- iterative / non-mutative implementation
+```java
+    /**
+     * Iterative implementation and non-mutative
+     */
+    public static IntList squareIterative(IntList L) {
+        IntList newList = new IntList(L.first * L.first , null);
+        IntList retList = newList;
+        IntList p = L.rest;
+        while (p != null) {
+            newList.rest = new IntList(p.first * p.first, null);
+            newList = newList.rest;
+            p = p.rest;
+        }
+
+        return retList;
+    }
+```
+- recursive / mutative implementation
+```java
+    /**
+     * Recursive and mutative
+     */
+    public static IntList squareMutative(IntList L) {
+        // dummy return due to the function prototype
+        if (L == null)
+            return null;
+        
+        L.first *= L.first;
+        squareMutative(L.rest);
+        
+        return L;
+    }
+```
+- iterative / mutative implementation
+```java
+    /**
+     * Iterative and mutative implementation
+     */
+    public static IntList squareMutativeIterative(IntList L) {
+        IntList p = L;
+        while (p != null) {
+            p.first *= p.first;
+            p = p.rest;
+        }
+
+        return L;
+    }
+```
