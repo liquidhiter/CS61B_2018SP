@@ -52,3 +52,12 @@ someWalrus = new Walrus(1000, 8.3);
 
 ### Special Cases
 - Try to avoid special cases as much as possible by having a good design of code
+
+### Add details here explaining why
+- sentinel node is needed: avoid special case of empty list
+- last is needed: avoid complexity of finding the second to last node
+- another sentinel node is needed: avoid special case of checking last points to sentinel or normal node
+
+However, there are still some special cases need to be considered. For example, in the implementation of DLList with two sentinel nodes, the method `addFirst`, `tail` sentinel node need to point to the new first node when the list was empty.
+
+It actually makes sense because add the first element only makes change to the `head` sentinel node, and the `tail` sentinel node need initial `pointee`, otherwise, it can't start keeping tracking the last node as it always points to either `null` or a constant node. Same as add the last element. (Here the special case of empty list is discussed).
