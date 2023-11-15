@@ -139,6 +139,9 @@ It actually makes sense because add the first element only makes change to the `
     /* Got the error below when trying to create a generic array */
     //  error: generic array creation
     items = new T[CAPACITY];
+
+    // Correct way
+    T[] items = (T []) new Object[8];
 ```
 
 ### Array resize
