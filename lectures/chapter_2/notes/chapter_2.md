@@ -140,3 +140,9 @@ It actually makes sense because add the first element only makes change to the `
     //  error: generic array creation
     items = new T[CAPACITY];
 ```
+
+### Array resize
+- expand: `geometric resize`
+- shrink: `usage ratio`
+
+> Typically, when the `usage ratio` falls to less than `0.25`, the size of the array is halved.

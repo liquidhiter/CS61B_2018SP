@@ -1,15 +1,15 @@
-public class AList {
+public class AListGeneric<T> {
 
-    private int items[];
+    private T[] items;
     private int size;
 
     /* Dynamically adjust: shrink or expand */
     private int CAPACITY = 2;
 
     /* Instaniate an empty list */
-    public AList() {
+    public AListGeneric() {
         // items = new T[CAPACITY];
-        items = new int[CAPACITY];
+        items = (T[])new Object[CAPACITY];
         size = 0;
     }
 
@@ -24,7 +24,7 @@ public class AList {
         CAPACITY *= factor;
 
         /* Create new array */
-        int[] newArray = new int[CAPACITY];
+        T[] newArray = (T[])new Object[CAPACITY];
 
         /* Copy existing elements into the new array */
         System.arraycopy(items, 0, newArray, 0, size);
@@ -37,7 +37,7 @@ public class AList {
 
     private void shrink(int factor) {
         CAPACITY /= factor;
-        int[] newArray = new int[CAPACITY];
+        T[] newArray = (T[])new Object[CAPACITY];
         System.arraycopy(items, 0, newArray, 0, size);
         items = newArray;
     }
@@ -46,7 +46,7 @@ public class AList {
      * 
      * @param x
      */
-    public void addLast(int x) {
+    public void addLast(T x) {
         // TODO: remove the assert here
         // assert(size < CAPACITY) : "Can't eat more than I can hold";
         if (size == CAPACITY) {
@@ -65,7 +65,7 @@ public class AList {
      * 
      * @return
      */
-    public int getLast() {
+    public T getLast() {
         return items[size - 1];
     }
 
@@ -74,7 +74,7 @@ public class AList {
      * @param index
      * @return
      */
-    public int get(int index) {
+    public T get(int index) {
         // assert(index >= 0 && index < size);
         if (!(index >= 0 && index < size)) {
             throw new IndexOutOfBoundsException("Index out of bounds");
@@ -95,15 +95,19 @@ public class AList {
      * 
      * @return
      */
-    public int removeLast() {
+    public T removeLast() {
         if (size == 0) {
             throw new RuntimeException("Empty list");
         }
-        return items[--size];
+        
+        T last = getLast();
+        items[size - 1] = null;
+        size -= 1;
+        return last;
     }
 
     public static void main(String[] args) {
-        AList numbers = new AList();
+        AListGeneric<Integer> numbers = new AListGeneric<>();
         assert(numbers.size() == 0);
         for (int i = 1; i < 100000; ++i) {
             numbers.addLast(i);
