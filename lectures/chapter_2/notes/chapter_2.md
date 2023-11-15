@@ -133,3 +133,10 @@ It actually makes sense because add the first element only makes change to the `
         return L;
     }
 ```
+
+### Generic Array Creation
+```java
+    /* Got the error below when trying to create a generic array */
+    //  error: generic array creation
+    items = new T[CAPACITY];
+```
