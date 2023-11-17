@@ -80,6 +80,7 @@ public class Planet {
      */
     public double calcForceExertedBy(Planet p) {
         assert(p != null);
+        assert(p != this);
         
         double dist = calcDistance(p);
         return GRAVITYCONSTANT * this.mass * p.mass / (dist * dist);
@@ -93,6 +94,7 @@ public class Planet {
      */
     public double calcForceExertedByX(Planet p) {
         assert(p != null);
+        assert(p != this);
 
         double forceExertedBy = calcForceExertedBy(p);
         /* Duplicated calculation of the distance? */
@@ -108,6 +110,7 @@ public class Planet {
      */
     public double calcForceExertedByY(Planet p) {
         assert(p != null);
+        assert(p != this);
 
         double forceExertedBy = calcForceExertedBy(p);
         /* Duplicated calculation of the distance? */
@@ -143,4 +146,21 @@ public class Planet {
         return netForxtY;
     }
 
+    /*==================================== update ===================================*/
+    public void update(double seconds, double extForceX, double extForceY) {
+        // Sanity check of the input
+        assert(seconds > 0) : "Given time should be a non-negative number!";
+
+        // Calculate accerlation speed
+        double accNetX = extForceX / mass;
+        double accNetY = extForceY / mass;
+
+        // Calculate new speed
+        xxVel += (seconds * accNetX);
+        yyVel += (seconds * accNetY);
+
+        // Calculate new positions
+        xxPos += (xxVel * seconds);
+        yyPos += (yyVel * seconds);
+    }
 }
