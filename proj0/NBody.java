@@ -3,7 +3,7 @@ public class NBody {
     private static double inT;
     private static double inDt;
     private static String inDataFilePath;
-    public static final String BACKGROUND_IMG = "./images/starfield.jpg";
+    private static final String BACKGROUND_IMG = "./images/starfield.jpg";
     private static final int PAUSE_INTERVAL = 10; /* milliseconds */
 
     /**
