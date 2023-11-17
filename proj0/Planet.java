@@ -163,4 +163,14 @@ public class Planet {
         xxPos += (xxVel * seconds);
         yyPos += (yyVel * seconds);
     }
+
+    /*=================================== draw =======================================*/
+    public void draw() {
+        /* Use relative path is not a good idea */
+        /* Only need to draw the picture here ??? */
+        StdDraw.picture(xxPos, yyPos, "./images/" + imgFileName);
+
+        /* Shows the drawing to the screen, and waits 2000 milliseconds. */
+        StdDraw.show();
+    }
 }
