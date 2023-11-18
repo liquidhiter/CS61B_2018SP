@@ -25,6 +25,7 @@ public class SLList<LochNess> implements List61B<LochNess>{
    * return element at index of i
    * @param i
    */
+  @Override
   public LochNess get(int i) {
     if (size == 0) {
       return null;
@@ -39,12 +40,14 @@ public class SLList<LochNess> implements List61B<LochNess>{
   }
 
   /** Adds x to the front of the list. */
+  @Override
   public void addFirst(LochNess x) {
     first = new StuffNode(x, first);
     size += 1;
   }
 
   /** Returns the first item in the list. */
+  @Override
   public LochNess getFirst() {
     if (size == 0) {
       return null;
@@ -54,6 +57,7 @@ public class SLList<LochNess> implements List61B<LochNess>{
   }
 
   /** Adds an item to the end of the list. */
+  @Override
   public void addLast(LochNess x) {
     if (size == 0) {
       first = new StuffNode(x, first);
@@ -75,6 +79,7 @@ public class SLList<LochNess> implements List61B<LochNess>{
    * Time complexity: O(N) - non-optimized
    * @return the `value` of last element
    */
+  @Override
   public LochNess getLast() {
     if (size == 0) {
       return null;
@@ -92,6 +97,7 @@ public class SLList<LochNess> implements List61B<LochNess>{
    * Time complexity: O(N)
    * @return the last element
    */
+  @Override
   public LochNess removeLast() {
     /* Need to find the second-to-last node
      * Well, the single element list is a special case
@@ -123,6 +129,7 @@ public class SLList<LochNess> implements List61B<LochNess>{
    * @param item
    * @param position
    */
+  @Override
   public void insert(LochNess item, int position) {
     if (position < 0 || position > size) {
       throw new IllegalArgumentException("Index out of range");
@@ -141,5 +148,10 @@ public class SLList<LochNess> implements List61B<LochNess>{
     size += 1;
   }
 
+  /**
+   *
+   * @return
+   */
+  @Override
   public int size() { return size; }
 }
