@@ -153,5 +153,21 @@ public class SLList<LochNess> implements List61B<LochNess>{
    * @return
    */
   @Override
-  public int size() { return size; }
+  public int size() {
+    return size;
+  }
+
+  @Override
+  public void print() {
+    for (StuffNode node = first; node != null; node = node.next) {
+      System.out.print(node.item + " ");
+    }
+  }
+
+  public static void main(String[] args) {
+    List61B<String> someList = new SLList<String>("GURA");
+    someList.addFirst("elk");
+
+    someList.print();
+  }
 }

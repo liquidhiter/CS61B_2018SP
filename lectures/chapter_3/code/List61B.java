@@ -7,4 +7,11 @@ public interface List61B<T> {
     public T get(int i);
     public void insert(T x, int position);
     public int size();
+
+    default public void print() {
+        for (int i = 0; i < size(); i += 1) {
+            System.out.print(get(i) + " ");
+        }
+        System.out.println();
+    }
 }
