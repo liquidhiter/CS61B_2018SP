@@ -34,3 +34,50 @@ public class TestSort {
     }
 }
 ```
+
+### interface
+```java
+public interface List61B<T> {
+    public void addFirst(T x);
+    public void addLast(T x);
+    public T getFirst();
+    public T getLast();
+    public T removeLast();
+    public T get(int i);
+    public void insert(T x, int position);
+    public int size();
+
+    /* implementation of method is supported in Java interface 
+     * as `default` meant: all sub-classes use this implementation if no override is provided
+    */
+    default public void print() {
+        for (int i = 0; i < size(); i += 1) {
+            System.out.print(get(i) + " ");
+        }
+        System.out.println();
+    }
+}
+```
+
+### dynamic type and override and polymorphism
+```java
+List61B<String> list = new SLList61B<String>();
+list.addLast();
+```
+- `list` is an object of type `List61B<String>`
+- `list` points to an object of type `SLList61B<String>`
+- memory compatible as `SLList61B` follows the same `layout` (might not be a good word here): `methods`
+- `addLast` method call refers to the pointee object
+
+### static type and overload
+```java
+public static void peek(List61B<String> list)
+public static void peek(SLList<String> list)
+
+SLList<String> sLList = new SLList<String>("HI");
+AList<String> aList = new AList<String>("IH");
+SLList<String> SP = new SLList<String>();
+List61B<String> LP = SP;
+peek(SP); // ca;; peek(SLList<String> list)
+peek(LP); // ca;; peek(SLList<String> list)
+```
