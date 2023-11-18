@@ -5,7 +5,7 @@ public class WordUtils {
      * @param list
      * @return
      */
-    public static String longest(SSList<String> list) {
+    public static String longest(SLList<String> list) {
         int indexOfLongest = 0;
         int lenOfList = list.size();
         for (int i = 1; i < lenOfList; ++i) {
