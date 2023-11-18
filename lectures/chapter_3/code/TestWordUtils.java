@@ -7,7 +7,7 @@ public class TestWordUtils {
     public void testLongest() {
         /* seriously: shouldn't we add the test case with invalid input parameters? */
         /* What can be tested: return null or exception? */
-        
+
         /* SLList with single element */
         SLList<String> testList1 = new SLList<>("longest");
         String expected1 = "longest";

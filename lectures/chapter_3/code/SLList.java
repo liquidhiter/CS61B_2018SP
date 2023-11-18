@@ -2,7 +2,7 @@
  * An SLList is a list of integers, which hides the terrible truth
  * of the nakedness within.
  */
-public class SLList<LochNess> {
+public class SLList<LochNess> implements List61B<LochNess>{
   private class StuffNode {
     public LochNess item;
     public StuffNode next;
@@ -23,11 +23,11 @@ public class SLList<LochNess> {
 
   /**
    * return element at index of i
-   * @param x
+   * @param i
    */
   public LochNess get(int i) {
-    if ((i < 0) || (i >= size)) {
-        throw new IllegalArgumentException("index out of range");
+    if (size == 0) {
+      return null;
     }
 
     StuffNode head = first;
@@ -45,20 +45,100 @@ public class SLList<LochNess> {
   }
 
   /** Returns the first item in the list. */
-  public LochNess getFirst() { return first.item; }
+  public LochNess getFirst() {
+    if (size == 0) {
+      return null;
+    }
+
+    return first.item;
+  }
 
   /** Adds an item to the end of the list. */
   public void addLast(LochNess x) {
-    size += 1;
+    if (size == 0) {
+      first = new StuffNode(x, first);
+    } else {
+      StuffNode p = first;
 
-    StuffNode p = first;
+      /* Move p until it reaches the end of the list. */
+      while (p.next != null) {
+        p = p.next;
+      }
 
-    /* Move p until it reaches the end of the list. */
-    while (p.next != null) {
-      p = p.next;
+      p.next = new StuffNode(x, null);
     }
 
-    p.next = new StuffNode(x, null);
+    size += 1;
+  }
+
+  /**
+   * Time complexity: O(N) - non-optimized
+   * @return the `value` of last element
+   */
+  public LochNess getLast() {
+    if (size == 0) {
+      return null;
+    }
+
+    StuffNode node = first;
+    while (node.next != null) {
+      node = node.next;
+    }
+
+    return node.item;
+  }
+
+  /**
+   * Time complexity: O(N)
+   * @return the last element
+   */
+  public LochNess removeLast() {
+    /* Need to find the second-to-last node
+     * Well, the single element list is a special case
+     * which results in an empty list and requires the addLast and getLast
+     * method to be updated
+     **/
+    if (size == 0) {
+      return null;
+    }
+
+    LochNess returnVal;
+    if (size == 1) {
+      returnVal = first.item;
+      first = null;
+    } else {
+      StuffNode node = first;
+      for (int i = 0; i < size - 1; ++i) {
+        node = node.next;
+      }
+      returnVal = node.item;
+    }
+    size -= 1;
+
+    return returnVal;
+  }
+
+  /**
+   * Time Complexity: O(N)
+   * @param item
+   * @param position
+   */
+  public void insert(LochNess item, int position) {
+    if (position < 0 || position > size) {
+      throw new IllegalArgumentException("Index out of range");
+    }
+
+    StuffNode node = first;
+    /* Find the element at position - 1 */
+    for (int i = 0; i < position - 1; ++i) {
+      node = node.next;
+    }
+
+    /* Insert the new node */
+    StuffNode next = node.next;
+    node.next = new StuffNode(item, next);
+
+    size += 1;
   }
 
   public int size() { return size; }
