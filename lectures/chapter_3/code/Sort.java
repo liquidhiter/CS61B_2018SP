@@ -30,6 +30,16 @@ public class Sort {
     }
 
     /**
+     * 
+     * @param str
+     * @param from
+     * @param to
+     */
+    public static void sort(String[] str, int from, int to) {
+        selectionSort(str, from, to);
+    }
+
+    /**
      * Return the smallest string in the given array
      * @param str
      * @return
