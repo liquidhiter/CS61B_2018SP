@@ -126,15 +126,65 @@ public class Discussion3 {
             }
             return p.item;
         }
+    }
 
-        public static void main(String[] args) {
-            Discussion3.SLList list2 = new Discussion3.SLList();
-            list2.addFirst(2);
-            list2.addFirst(6);
-            list2.addFirst(10);
-            list2.addFirst(5);
-            list2.reverseRecursive();
+    public static class Array {
+        public static int[] insert(int[] arr, int item, int position) {
+            int len = arr.length;
+            int[] newArray = new int[len + 1];
+            if (position >= len) {
+                System.arraycopy(arr, 0, newArray, 0, len);
+                newArray[len] = item;
+            } else {
+                System.arraycopy(arr, 0, newArray, 0, position);
+                newArray[position] = item;
+                System.arraycopy(arr, position, newArray, position + 1, len - position);
+            }
+
+            return newArray;
         }
 
+        /**
+         *
+         * @param arr
+         * @param from
+         * @param to
+         */
+        public static void reverseRecursive(int[] arr, int from, int to) {
+            if (from >= to) {
+                return;
+            }
+
+            int tmp = arr[from];
+            arr[from] = arr[to];
+            arr[to] = tmp;
+
+            reverseRecursive(arr, from + 1, to - 1);
+        }
+
+        /**
+         *
+         * @param arr
+         */
+        public static void reverse(int[] arr) {
+            int len = arr.length;
+            for (int left = 0, right = len - 1; left < right; ++left, --right) {
+                int tmp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = tmp;
+            }
+        }
+
+        public static int[] replicate(int[] arr) {
+            int len = arr.length;
+            int[] newArray = new int[len << 1];
+            int index = 0;
+            for (int i = 0; i < len; ++i) {
+                newArray[index++] = arr[i];
+                newArray[index++] = arr[i];
+            }
+
+            return newArray;
+        }
     }
 }
