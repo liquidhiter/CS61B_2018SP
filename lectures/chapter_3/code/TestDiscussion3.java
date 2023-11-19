@@ -70,7 +70,6 @@ public class TestDiscussion3 {
     }
 
     @Test
-    @Ignore
     public void testReverseRecursive() {
         Discussion3.SLList list0 = new Discussion3.SLList();
         list0.addFirst(0);

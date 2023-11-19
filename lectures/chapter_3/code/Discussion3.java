@@ -88,9 +88,9 @@ public class Discussion3 {
          * TODO: not finished yet
          * @param node
          */
-        public void reverseNodes(IntNode node, IntNode prevNode) {
+        public IntNode reverseNodes(IntNode node, IntNode prevNode) {
             if (node == null) {
-                return;
+                return prevNode;
             }
 
             /*Save the original next node*/
@@ -100,7 +100,8 @@ public class Discussion3 {
             /*Update previous node for the next iteration*/
             prevNode = node;
 
-            reverseNodes(nextNode, prevNode);
+            IntNode retNode = reverseNodes(nextNode, prevNode);
+            return retNode;
         }
 
   
@@ -109,7 +110,7 @@ public class Discussion3 {
          * Time Complexity:
          */
         public void reverseRecursive() {
-            reverseNodes(first, null);
+            first = reverseNodes(first, null);
         }
 
         /**

@@ -1,4 +1,4 @@
-public class LinkedListDeque<T> implements Deque<T> {
+public class LinkedListDeque<T> {
 
     /*=============================== IntNode ===============================*/
     private class IntNode {
@@ -35,7 +35,10 @@ public class LinkedListDeque<T> implements Deque<T> {
         throw new RuntimeException("Not yet implemented!");
     }
 
-    @Override
+    /**
+     *
+     * @param item
+     */
     public void addFirst(T item) {
         IntNode first = new IntNode(null, item, null);
         first.prev = sentinel;
@@ -51,7 +54,11 @@ public class LinkedListDeque<T> implements Deque<T> {
         size += 1;
     }
 
-    @Override
+
+    /**
+     *
+     * @param item
+     */
     public void addLast(T item) {
         IntNode last = new IntNode(null, item, null);
         last.prev = sentinel.prev;
@@ -67,12 +74,18 @@ public class LinkedListDeque<T> implements Deque<T> {
         size += 1;
     }
 
-    @Override
+    /**
+     *
+     * @return
+     */
     public boolean isEmpty() {
         return size == 0;
     }
 
-    @Override
+    /**
+     *
+     * @return
+     */
     public int size() {
         return size;
     }
@@ -80,7 +93,6 @@ public class LinkedListDeque<T> implements Deque<T> {
     /**
      *
      */
-    @Override
     public void printDeque() {
         if (isEmpty()) {
             System.out.println("");
@@ -102,7 +114,6 @@ public class LinkedListDeque<T> implements Deque<T> {
      *
      * @return
      */
-    @Override
     public T removeFirst() {
         if (isEmpty()) {
             return null;
@@ -122,7 +133,6 @@ public class LinkedListDeque<T> implements Deque<T> {
      *
      * @return
      */
-    @Override
     public T removeLast() {
         if (isEmpty()) {
             return null;
@@ -143,7 +153,6 @@ public class LinkedListDeque<T> implements Deque<T> {
      * @param index
      * @return
      */
-    @Override
     public T get(int index) {
         int position = 0;
         IntNode p = sentinel.next;
