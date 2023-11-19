@@ -13,7 +13,7 @@ public class LinkedListDeque<T> {
         }
     }
 
-    /*=============================== Implementation of LinkedListDeque ===============================*/
+    /*==== Implementation of LinkedListDeque ====*/
     private IntNode sentinel;       // sentinel node: tracking both head and tail
     private int size;               // cache the size to ensure constant time of getting the size
 
@@ -196,7 +196,7 @@ public class LinkedListDeque<T> {
         return nodeAtIndex == null ? null : nodeAtIndex.item;
     }
 
-    /*=============================== Useful method for Unit Test ===============================*/
+    /*==== Useful method for Unit Test ====*/
 
     /**
      *

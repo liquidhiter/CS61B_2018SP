@@ -20,11 +20,11 @@ public class TestLinkedListDeque {
 
         emptyDeque.addFirst(0);
         assertEquals(1, emptyDeque.size());
-        assertEquals((Integer)(0), emptyDeque.getFirst());
+        assertEquals((Integer) 0, emptyDeque.getFirst());
 
         for (int i = 1; i < 10000; ++i) {
             emptyDeque.addFirst(i);
-            assertEquals((Integer)(i), emptyDeque.getFirst());
+            assertEquals((Integer) i, emptyDeque.getFirst());
         }
     }
 
@@ -35,11 +35,11 @@ public class TestLinkedListDeque {
 
         emptyDeque.addLast(0);
         assertEquals(1, emptyDeque.size());
-        assertEquals((Integer)(0), emptyDeque.getLast());
+        assertEquals((Integer) 0, emptyDeque.getLast());
 
         for (int i = 1; i < 10000; ++i) {
             emptyDeque.addLast(i);
-            assertEquals((Integer)(i), emptyDeque.getLast());
+            assertEquals((Integer) i, emptyDeque.getLast());
         }
     }
 
@@ -49,9 +49,9 @@ public class TestLinkedListDeque {
         assertNull(emptyDeque.removeFirst());
 
         emptyDeque.addFirst(0);
-        assertEquals((Integer)0, emptyDeque.removeFirst());
+        assertEquals((Integer) 0, emptyDeque.removeFirst());
         emptyDeque.addLast(0);
-        assertEquals((Integer)0, emptyDeque.removeFirst());
+        assertEquals((Integer) 0, emptyDeque.removeFirst());
 
         for (int i = 0; i < 10000; ++i) {
             emptyDeque.addFirst(i);
@@ -60,10 +60,10 @@ public class TestLinkedListDeque {
             emptyDeque.addLast(i);
         }
         for (int i = 9999; i >= 0; --i) {
-            assertEquals((Integer)i, emptyDeque.removeFirst());
+            assertEquals((Integer) i, emptyDeque.removeFirst());
         }
         for (int i = 0; i < 10000; ++i) {
-            assertEquals((Integer)i, emptyDeque.removeFirst());
+            assertEquals((Integer) i, emptyDeque.removeFirst());
         }
     }
 
@@ -73,9 +73,9 @@ public class TestLinkedListDeque {
         assertNull(emptyDeque.removeLast());
 
         emptyDeque.addFirst(0);
-        assertEquals((Integer)0, emptyDeque.removeLast());
+        assertEquals((Integer) 0, emptyDeque.removeLast());
         emptyDeque.addLast(0);
-        assertEquals((Integer)0, emptyDeque.removeLast());
+        assertEquals((Integer) 0, emptyDeque.removeLast());
 
         for (int i = 0; i < 10000; ++i) {
             emptyDeque.addLast(i);
@@ -84,10 +84,10 @@ public class TestLinkedListDeque {
             emptyDeque.addFirst(i);
         };
         for (int i = 9999; i >= 0; --i) {
-            assertEquals((Integer)i, emptyDeque.removeLast());
+            assertEquals((Integer) i, emptyDeque.removeLast());
         }
         for (int i = 0; i < 10000; ++i) {
-            assertEquals((Integer)i, emptyDeque.removeLast());
+            assertEquals((Integer) i, emptyDeque.removeLast());
         }
     }
 
@@ -99,12 +99,12 @@ public class TestLinkedListDeque {
         }
         assertEquals(10000, emptyDeque.size());
         for (int i = 9999; i >= 5000; --i) {
-            assertEquals((Integer)i, emptyDeque.removeLast());
+            assertEquals((Integer) i, emptyDeque.removeLast());
             assertEquals(i, emptyDeque.size());
         }
         assertEquals(5000, emptyDeque.size());
         for (int i = 0; i < 5000; ++i) {
-            assertEquals((Integer)i, emptyDeque.removeFirst());
+            assertEquals((Integer) i, emptyDeque.removeFirst());
             assertEquals(4999 - i, emptyDeque.size());
         }
         assertEquals(0, emptyDeque.size());
@@ -120,7 +120,7 @@ public class TestLinkedListDeque {
             emptyDeque.addLast(i);
         }
         for (int i = 0; i < 10000; ++i) {
-            assertEquals((Integer)i, emptyDeque.get(i));
+            assertEquals((Integer) i, emptyDeque.get(i));
         }
     }
 
@@ -134,7 +134,7 @@ public class TestLinkedListDeque {
             emptyDeque.addLast(i);
         }
         for (int i = 0; i < 10000; ++i) {
-            assertEquals((Integer)i, emptyDeque.getRecursive(i));
+            assertEquals((Integer) i, emptyDeque.getRecursive(i));
         }
     }
 
