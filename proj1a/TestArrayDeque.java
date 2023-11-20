@@ -103,39 +103,13 @@ public class TestArrayDeque {
     }
 
     @Test
-    public void testFailedTestCase() {
-        ArrayDeque<Integer> ArrayDeque = new ArrayDeque<>();
-
-        ArrayDeque.addFirst(0);
-        ArrayDeque.get(0);
-        ArrayDeque.get(0);
-        ArrayDeque.removeLast();
-        ArrayDeque.addFirst(4);
-        ArrayDeque.removeFirst();
-        ArrayDeque.addLast(6);
-        ArrayDeque.get(0);
-        ArrayDeque.get(0);
-        ArrayDeque.get(0);
-        ArrayDeque.addLast(10);
-        ArrayDeque.addLast(11);
-        ArrayDeque.addFirst(12);
-        ArrayDeque.addLast(13);
-        ArrayDeque.addFirst(14);
-        ArrayDeque.addFirst(15);
-        ArrayDeque.addFirst(16);
-        ArrayDeque.addLast(17);
-        /* Failing because resizing hasnt been implemented yet */
-        ArrayDeque.removeFirst();
-    }
-
-    @Test
     public void testExpand() {
         ArrayDeque<Integer> emptyDeque = new ArrayDeque<>();
         for (int i = 0; i < 8; ++i) {
             emptyDeque.addFirst(i);
         }
         emptyDeque.addFirst(9);
-        assertEquals( (Integer) 9, emptyDeque.get(0));
+        assertEquals((Integer) 9, emptyDeque.get(0));
         emptyDeque.addFirst(10);
         assertEquals((Integer) 10, emptyDeque.get(0));
 

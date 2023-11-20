@@ -34,7 +34,7 @@ public class ArrayDeque<T> {
         for (int i = 0; i < numOfElements; ++i) {
             /* same as addLast call in deep copy constructor of LinkedListDeque */
             items[tail] = (T) other.get(i);
-            tail = (tail + 1) % capacity;;
+            tail = (tail + 1) % capacity;
             size += 1;
         }
     }
@@ -64,7 +64,7 @@ public class ArrayDeque<T> {
         /* Update the capacity */
         capacity = newCapacity;
         /* Assign new items and GC old items */
-        T[] oldItems=  items;
+        T[] oldItems =  items;
         items = newItems;
         oldItems = null;
     }

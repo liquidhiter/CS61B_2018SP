@@ -82,7 +82,7 @@ public class TestLinkedListDeque {
         }
         for (int i = 0; i < 10000; ++i) {
             emptyDeque.addFirst(i);
-        };
+        }
         for (int i = 9999; i >= 0; --i) {
             assertEquals((Integer) i, emptyDeque.removeLast());
         }
