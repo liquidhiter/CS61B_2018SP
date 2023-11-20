@@ -19,25 +19,26 @@ public class ArrayDeque<T> {
 
     /**
      * Time Complexity: O(N)
+     * NOTE: not required in course of 2018 summer (use the gradescope)
      * @param other
      */
-    public ArrayDeque(ArrayDeque other) {
-        /* Avoid the overhead of resizing */
-        creatEmptyDeque(other.capacity);
-
-        /**
-         * copy elements from other into this
-         * NOTE: call addFirst or addLast results in bad performance
-         *       considering the time complexity of resizing (O(N) x O(N))
-         */
-        int numOfElements = other.size();
-        for (int i = 0; i < numOfElements; ++i) {
-            /* same as addLast call in deep copy constructor of LinkedListDeque */
-            items[tail] = (T) other.get(i);
-            tail = (tail + 1) % capacity;
-            size += 1;
-        }
-    }
+//    public ArrayDeque(ArrayDeque other) {
+//        /* Avoid the overhead of resizing */
+//        creatEmptyDeque(other.capacity);
+//
+//        /**
+//         * copy elements from other into this
+//         * NOTE: call addFirst or addLast results in bad performance
+//         *       considering the time complexity of resizing (O(N) x O(N))
+//         */
+//        int numOfElements = other.size();
+//        for (int i = 0; i < numOfElements; ++i) {
+//            /* same as addLast call in deep copy constructor of LinkedListDeque */
+//            items[tail] = (T) other.get(i);
+//            tail = (tail + 1) % capacity;
+//            size += 1;
+//        }
+//    }
 
     /**
      * Create an empty ArrayDeque
@@ -73,7 +74,7 @@ public class ArrayDeque<T> {
      * Expand the array when it is full
      * @param factor
      */
-    public void expand(int factor) {
+    private void expand(int factor) {
         int newCapacity = capacity * factor;
         updateItems(newCapacity);
     }

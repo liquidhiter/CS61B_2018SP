@@ -39,19 +39,20 @@ public class LinkedListDeque<T> {
     /**
      * Returns a deep copy of the given linked list deque
      * Time complexity: O(N) where N = other.size()
+     * NOTE: not required in course of 2018 summer (use the gradescope)
      * @param other
      */
-    public LinkedListDeque(LinkedListDeque other) {
-        /* Initialize this deque to be an empty one */
-        createEmptyDeque();
-
-        /* Deep copy each element in the other deque */
-        IntNode node = other.sentinel.next;
-        while (node != other.sentinel) {
-            addLast(node.item);
-            node = node.next;
-        }
-    }
+//    public LinkedListDeque(LinkedListDeque other) {
+//        /* Initialize this deque to be an empty one */
+//        createEmptyDeque();
+//
+//        /* Deep copy each element in the other deque */
+//        IntNode node = other.sentinel.next;
+//        while (node != other.sentinel) {
+//            addLast(node.item);
+//            node = node.next;
+//        }
+//    }
 
     /**
      *

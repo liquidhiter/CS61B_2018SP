@@ -152,22 +152,22 @@ public class TestArrayDeque {
         assertEquals(2, emptyDeque.size());
     }
 
-    @Test
-    public void testDeepCopyConstructor() {
-        ArrayDeque<Integer> other = new ArrayDeque<>();
-        for (int i = 0; i < 10000; ++i) {
-            if (i % 3 == 2) {
-                other.addLast(i);
-            } else {
-                other.addFirst(i);
-            }
-        }
-
-        ArrayDeque<Integer> copy = new ArrayDeque<>(other);
-        for (int i = 0; i < 10000; ++i) {
-            assertEquals(other.get(i), copy.get(i));
-            assertEquals(other.get(0), copy.get(0));
-            assertEquals(other.get(other.size() - 1), copy.get(copy.size() - 1));
-        }
-    }
+//    @Test
+//    public void testDeepCopyConstructor() {
+//        ArrayDeque<Integer> other = new ArrayDeque<>();
+//        for (int i = 0; i < 10000; ++i) {
+//            if (i % 3 == 2) {
+//                other.addLast(i);
+//            } else {
+//                other.addFirst(i);
+//            }
+//        }
+//
+//        ArrayDeque<Integer> copy = new ArrayDeque<>(other);
+//        for (int i = 0; i < 10000; ++i) {
+//            assertEquals(other.get(i), copy.get(i));
+//            assertEquals(other.get(0), copy.get(0));
+//            assertEquals(other.get(other.size() - 1), copy.get(copy.size() - 1));
+//        }
+//    }
 }

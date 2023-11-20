@@ -138,48 +138,48 @@ public class TestLinkedListDeque {
         }
     }
 
-    @Test
-    public void testDeepCopyConstructor() {
-        LinkedListDeque<Integer> other = new LinkedListDeque<>();
-        for (int i = 0; i < 10000; ++i) {
-            if (i % 3 == 2) {
-                other.addLast(i);
-            } else {
-                other.addFirst(i);
-            }
-        }
-
-        LinkedListDeque<Integer> copy = new LinkedListDeque<>(other);
-        for (int i = 0; i < 10000; ++i) {
-            assertEquals(other.get(i), copy.get(i));
-            assertEquals(other.get(0), copy.get(0));
-            assertEquals(other.get(other.size() - 1), copy.get(copy.size() - 1));
-        }
-
-//        int lastOfOther = other.get(other.size() - 1);
-//        other.removeLast();
-//        assertNotEquals((Integer) lastOfOther, other.get(other.size() - 1));
-//        assertEquals((Integer) lastOfOther, copy.get(copy.size() - 1));
-
-        int first = other.get(0);
-        int last = other.get(other.size() - 1);
-        for (int i = 0; i < 10000; ++i) {
-            if (i % 2 == 0) {
-                int firstOfOther = other.get(0);
-                other.removeFirst();
-                assertEquals(9999 - i, other.size());
-                assertNotEquals((Integer) firstOfOther, other.get(0));
-                assertEquals((Integer) first, copy.get(0));
-                assertEquals(10000, copy.size());
-            } else {
-                int lastOfOther = other.get(other.size() - 1);
-                other.removeLast();
-                assertEquals(9999 - i, other.size());
-                assertNotEquals((Integer) lastOfOther, other.get(other.size() - 1));
-                assertEquals((Integer) last, copy.get(copy.size() - 1));
-                assertEquals(10000, copy.size());
-            }
-        }
-    }
+//    @Test
+//    public void testDeepCopyConstructor() {
+//        LinkedListDeque<Integer> other = new LinkedListDeque<>();
+//        for (int i = 0; i < 10000; ++i) {
+//            if (i % 3 == 2) {
+//                other.addLast(i);
+//            } else {
+//                other.addFirst(i);
+//            }
+//        }
+//
+//        LinkedListDeque<Integer> copy = new LinkedListDeque<>(other);
+//        for (int i = 0; i < 10000; ++i) {
+//            assertEquals(other.get(i), copy.get(i));
+//            assertEquals(other.get(0), copy.get(0));
+//            assertEquals(other.get(other.size() - 1), copy.get(copy.size() - 1));
+//        }
+//
+////        int lastOfOther = other.get(other.size() - 1);
+////        other.removeLast();
+////        assertNotEquals((Integer) lastOfOther, other.get(other.size() - 1));
+////        assertEquals((Integer) lastOfOther, copy.get(copy.size() - 1));
+//
+//        int first = other.get(0);
+//        int last = other.get(other.size() - 1);
+//        for (int i = 0; i < 10000; ++i) {
+//            if (i % 2 == 0) {
+//                int firstOfOther = other.get(0);
+//                other.removeFirst();
+//                assertEquals(9999 - i, other.size());
+//                assertNotEquals((Integer) firstOfOther, other.get(0));
+//                assertEquals((Integer) first, copy.get(0));
+//                assertEquals(10000, copy.size());
+//            } else {
+//                int lastOfOther = other.get(other.size() - 1);
+//                other.removeLast();
+//                assertEquals(9999 - i, other.size());
+//                assertNotEquals((Integer) lastOfOther, other.get(other.size() - 1));
+//                assertEquals((Integer) last, copy.get(copy.size() - 1));
+//                assertEquals(10000, copy.size());
+//            }
+//        }
+//    }
 
 }
