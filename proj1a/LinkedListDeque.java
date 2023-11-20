@@ -18,9 +18,9 @@ public class LinkedListDeque<T> {
     private int size;               // cache the size to ensure constant time of getting the size
 
     /**
-     * Returns an empty linked list deque
+     *
      */
-    public LinkedListDeque() {
+    private void createEmptyDeque() {
         sentinel = new IntNode(null, null, null); // null item to be compatible with generic type T
         sentinel.prev = sentinel;
         sentinel.next = sentinel;
@@ -28,11 +28,29 @@ public class LinkedListDeque<T> {
     }
 
     /**
+     * Returns an empty linked list deque
+     * Another option (I think it's better): this(null);
+     * for readability: call createEmptyDeque()
+     */
+    public LinkedListDeque() {
+        createEmptyDeque();
+    }
+
+    /**
      * Returns a deep copy of the given linked list deque
+     * Time complexity: O(N) where N = other.size()
      * @param other
      */
     public LinkedListDeque(LinkedListDeque other) {
-        throw new RuntimeException("Not yet implemented!");
+        /* Initialize this deque to be an empty one */
+        createEmptyDeque();
+
+        /* Deep copy each element in the other deque */
+        IntNode node = other.sentinel.next;
+        while (node != other.sentinel) {
+            addLast(node.item);
+            node = node.next;
+        }
     }
 
     /**
@@ -194,31 +212,5 @@ public class LinkedListDeque<T> {
     public T getRecursive(int index) {
         IntNode nodeAtIndex = getRecursive(sentinel.next, index);
         return nodeAtIndex == null ? null : nodeAtIndex.item;
-    }
-
-    /*==== Useful method for Unit Test ====*/
-
-    /**
-     *
-     * @return
-     */
-    public T getFirst() {
-        if (isEmpty()) {
-            return null;
-        }
-
-        return sentinel.next.item;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public T getLast() {
-        if (isEmpty()) {
-            return null;
-        }
-
-        return sentinel.prev.item;
     }
 }

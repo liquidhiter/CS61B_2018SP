@@ -101,4 +101,99 @@ public class TestArrayDeque {
         emptyDeque.addLast(8);
         assertEquals((Integer) 8, emptyDeque.get(7));
     }
+
+    @Test
+    public void testFailedTestCase() {
+        ArrayDeque<Integer> ArrayDeque = new ArrayDeque<>();
+
+        ArrayDeque.addFirst(0);
+        ArrayDeque.get(0);
+        ArrayDeque.get(0);
+        ArrayDeque.removeLast();
+        ArrayDeque.addFirst(4);
+        ArrayDeque.removeFirst();
+        ArrayDeque.addLast(6);
+        ArrayDeque.get(0);
+        ArrayDeque.get(0);
+        ArrayDeque.get(0);
+        ArrayDeque.addLast(10);
+        ArrayDeque.addLast(11);
+        ArrayDeque.addFirst(12);
+        ArrayDeque.addLast(13);
+        ArrayDeque.addFirst(14);
+        ArrayDeque.addFirst(15);
+        ArrayDeque.addFirst(16);
+        ArrayDeque.addLast(17);
+        /* Failing because resizing hasnt been implemented yet */
+        ArrayDeque.removeFirst();
+    }
+
+    @Test
+    public void testExpand() {
+        ArrayDeque<Integer> emptyDeque = new ArrayDeque<>();
+        for (int i = 0; i < 8; ++i) {
+            emptyDeque.addFirst(i);
+        }
+        emptyDeque.addFirst(9);
+        assertEquals( (Integer) 9, emptyDeque.get(0));
+        emptyDeque.addFirst(10);
+        assertEquals((Integer) 10, emptyDeque.get(0));
+
+        emptyDeque.addLast(11);
+        assertEquals((Integer) 11, emptyDeque.get(emptyDeque.size() - 1));
+        emptyDeque.addLast(12);
+        assertEquals((Integer) 12, emptyDeque.get(emptyDeque.size() - 1));
+
+        emptyDeque.removeLast();
+        emptyDeque.removeFirst();
+        emptyDeque.removeFirst();
+        emptyDeque.removeLast();
+        emptyDeque.removeFirst();
+        emptyDeque.removeLast();
+        emptyDeque.removeFirst();
+        emptyDeque.removeFirst();
+        emptyDeque.removeLast();
+        emptyDeque.removeFirst();
+
+        assertEquals(2, emptyDeque.size());
+
+        for (int i = 0; i < 10000; ++i) {
+            if (i % 4 == 2) {
+                emptyDeque.addLast(i);
+            } else {
+                emptyDeque.addFirst(i);
+            }
+        }
+
+        assertEquals(10000 + 2, emptyDeque.size());
+
+        for (int i = 0; i < 10000; ++i) {
+            if (i % 3 == 1) {
+                emptyDeque.removeLast();
+            } else {
+                emptyDeque.removeLast();
+            }
+        }
+
+        assertEquals(2, emptyDeque.size());
+    }
+
+    @Test
+    public void testDeepCopyConstructor() {
+        ArrayDeque<Integer> other = new ArrayDeque<>();
+        for (int i = 0; i < 10000; ++i) {
+            if (i % 3 == 2) {
+                other.addLast(i);
+            } else {
+                other.addFirst(i);
+            }
+        }
+
+        ArrayDeque<Integer> copy = new ArrayDeque<>(other);
+        for (int i = 0; i < 10000; ++i) {
+            assertEquals(other.get(i), copy.get(i));
+            assertEquals(other.get(0), copy.get(0));
+            assertEquals(other.get(other.size() - 1), copy.get(copy.size() - 1));
+        }
+    }
 }
