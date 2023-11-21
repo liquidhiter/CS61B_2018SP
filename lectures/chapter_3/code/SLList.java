@@ -139,8 +139,12 @@ public class SLList<LochNess> implements List61B<LochNess>{
 
     StuffNode node = first;
     /* Find the element at position - 1 */
-    for (int i = 0; i < position - 1; ++i) {
-      node = node.next;
+    // for (int i = 0; i < position - 1; ++i) {
+    //   node = node.next;
+    // }
+    while (position > 0 && node.next != null) {
+        position -= 1;
+        node = node.next;
     }
 
     /* Insert the new node */

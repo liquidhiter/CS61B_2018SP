@@ -5,42 +5,42 @@
 /* The next item ALWAYS goes in the size position */
 
 public class AList<Item> implements List61B<Item>{
-	/* the stored integers */
-	private Item[] items;
-	private int size;
+    /* the stored integers */
+    private Item[] items;
+    private int size;
 
-	private static int RFACTOR = 2;
+    private static int RFACTOR = 2;
 
     /** Creates an empty list. */
     public AList() {
-    	size = 0;
-    	items = (Item[]) new Object[100];
+      size = 0;
+      items = (Item[]) new Object[100];
     }
 
     /** Resize our backing array so that it is
       * of the given capacity. */
     private void resize(int capacity) {
-    	Item[] a = (Item[]) new Object[capacity];
-    	System.arraycopy(items, 0, a, 0, size);
-    	items = a;    	
+      Item[] a = (Item[]) new Object[capacity];
+      System.arraycopy(items, 0, a, 0, size);
+      items = a;      
     }
 
     @Override
     /** Inserts X into the back of the list. */
     public void addLast(Item x) {
-    	if (size == items.length) {
-    		resize(size * RFACTOR);
-    	}
+      if (size == items.length) {
+        resize(size * RFACTOR);
+      }
 
-    	items[size] = x;
-    	size = size + 1;
+      items[size] = x;
+      size = size + 1;
     }
 
     @Override
     /** Returns the item from the back of the list. */
     public Item getLast() {
-    	int lastActualItemIndex = size - 1;
-    	return items[lastActualItemIndex];
+      int lastActualItemIndex = size - 1;
+      return items[lastActualItemIndex];
     }
 
     @Override
@@ -59,12 +59,12 @@ public class AList<Item> implements List61B<Item>{
     /** Deletes item from back of the list and
       * returns deleted item. */
     public Item removeLast() {
-		Item itemToReturn = getLast();
-		/* setting to zero not strictly necessary, but
-		 * it's a good habit (we'll see why soon) */
-		items[size - 1] = null;
-		size = size - 1;
-		return itemToReturn;
+    Item itemToReturn = getLast();
+    /* setting to zero not strictly necessary, but
+     * it's a good habit (we'll see why soon) */
+    items[size - 1] = null;
+    size = size - 1;
+    return itemToReturn;
     }
 
     @Override
