@@ -3,7 +3,7 @@
  * of the nakedness within.
  */
 public class SLList<LochNess> implements List61B<LochNess>{
-  private class StuffNode {
+  public class StuffNode {
     public LochNess item;
     public StuffNode next;
 
@@ -21,6 +21,12 @@ public class SLList<LochNess> implements List61B<LochNess>{
     size = 1;
   }
 
+  public SLList() {
+    /* It's really not a good idea to assign first to null */
+    first = null;
+    size = 0;
+  }
+
   /**
    * return element at index of i
    * @param i
@@ -31,13 +37,12 @@ public class SLList<LochNess> implements List61B<LochNess>{
       return null;
     }
 
-    StuffNode node = first.next;
-    while (i > 0 && node.next != null) {
-      i -= 1;
-      node = node.next;
+    StuffNode head = first;
+    for (int j = 0; j < i; ++j) {
+         head = head.next;
     }
 
-    return node.item;
+    return head.item;
   }
 
   /** Adds x to the front of the list. */
@@ -124,6 +129,14 @@ public class SLList<LochNess> implements List61B<LochNess>{
     size -= 1;
 
     return returnVal;
+  }
+
+  /**
+   *
+   * @return
+   */
+  public LochNess removeFirst() {
+    throw new RuntimeException("Not implemented yet!");
   }
 
   /**
