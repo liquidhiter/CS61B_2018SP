@@ -1,4 +1,4 @@
-public class SLListWithSentinel {
+public class SLList {
         
     /**
      * Nested class: IntNode representing each element in a linked-list
@@ -22,7 +22,7 @@ public class SLListWithSentinel {
      * 
      * @param x
      */
-    public SLListWithSentinel(int x) {
+    public SLList(int x) {
         IntNode first = new IntNode(x, null);
         // first initialize the sentinel node with special value of `63`
         head = new IntNode(63, first);
@@ -32,7 +32,7 @@ public class SLListWithSentinel {
     /**
      * Initialize an empty list
      */
-    public SLListWithSentinel() {
+    public SLList() {
         head = new IntNode(63, null);
         size = 0;
     }
