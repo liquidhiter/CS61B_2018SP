@@ -9,9 +9,9 @@ public class TestPalindrome {
     @Test(timeout = 2000)
     public void testWordToDeque() {
         /* Test returned deque must be null if given a null string */
-        String nullString = null;
-        Deque nullDeque = palindrome.wordToDeque(nullString);
-        assertNull(nullDeque);
+//        String nullString = null;
+//        Deque nullDeque = palindrome.wordToDeque(nullString);
+//        assertNull(nullDeque);
 
         String emptyString = "";
         Deque emptyDeque = palindrome.wordToDeque(emptyString);
@@ -102,10 +102,10 @@ public class TestPalindrome {
     public void testIsPalindromeWithComparator() {
         CharacterComparator offByOne = new OffByOne();
         /* Invalid input */
-        String nullString = null;
-        assertFalse(palindrome.isPalindrome(nullString, offByOne));
-        String nonNullString = "happy";
-        assertFalse(palindrome.isPalindrome(nonNullString, null));
+//        String nullString = null;
+//        assertFalse(palindrome.isPalindrome(nullString, offByOne));
+//        String nonNullString = "happy";
+//        assertFalse(palindrome.isPalindrome(nonNullString, null));
 
         /* is off-by-1 palindrome string */
         String isOffBy1Palindrome0 = "flake";

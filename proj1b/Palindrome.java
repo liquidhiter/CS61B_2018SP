@@ -26,13 +26,13 @@ public class Palindrome {
      * @param right
      * @return
      */
-    public boolean isPalindrome(String word, int left, int right) {
+    private boolean isPalindrome(String word, int left, int right) {
         if (left >= right) {
             return true;
         }
 
-        return isPalindrome(word, left + 1, right - 1) &
-                    (word.charAt(left) == word.charAt(right));
+        return isPalindrome(word, left + 1, right - 1)
+                & (word.charAt(left) == word.charAt(right));
     }
 
 

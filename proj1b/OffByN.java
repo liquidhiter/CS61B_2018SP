@@ -1,8 +1,8 @@
-public class OffByN implements CharacterComparator{
+public class OffByN implements CharacterComparator {
     private int offSetN;
 
     public OffByN(int N) {
-        assert(N >= 0);
+        assert (N >= 0);
         offSetN = N;
     }
 
