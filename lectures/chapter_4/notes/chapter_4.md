@@ -66,6 +66,8 @@ public class Dog implements Comparable<Dog> {
     }
 }
 ```
+### ADT
+- no implementation but only operations
 ### Collections
 - list
 - map
@@ -82,3 +84,12 @@ public class Dog implements Comparable<Dog> {
 - Cannot be instantiated
 - Methods are by default concrete unless specified to be `abstract`
 - Can only implement one per class
+### Packages
+- namespace organizes classes and interfaces
+- package name starts with website address
+- import classes
+    - `import java.util.Comparator;`
+    - `import java.util.*;`
+    - `import static org.junit.Assert.*`
+### Custom libraries
+- Add path in the `CLASSPATH` environment variable
