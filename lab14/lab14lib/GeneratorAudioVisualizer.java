@@ -20,19 +20,19 @@ public class GeneratorAudioVisualizer {
 		}
 
 		// Create Chart
-	    XYChart chart = QuickChart.getChart("Generator Output", "X", "Y", "y(x)", xValues, samples);
+		XYChart chart = QuickChart.getChart("Generator Output", "X", "Y", "y(x)", xValues, samples);
 	 
-	    // Show it
-	    new SwingWrapper<>(chart).displayChart();
+		// Show it
+		new SwingWrapper<>(chart).displayChart();
 
-	    for (int jj = 0; jj < numSamplesDraw; jj += 1) {
-	    	StdAudio.play(samples[jj]);
-	    }	
+		for (int jj = 0; jj < numSamplesDraw; jj += 1) {
+			StdAudio.play(samples[jj]);
+		}	
 
-	    int remainingSamples = numSamplesPlay - numSamplesDraw;
-	    for (int jj = 0; jj < remainingSamples; jj += 1) {
-	    	StdAudio.play(generator.next());
-	    }
+		int remainingSamples = numSamplesPlay - numSamplesDraw;
+		for (int jj = 0; jj < remainingSamples; jj += 1) {
+			StdAudio.play(generator.next());
+		}
 		
 	}
 } 

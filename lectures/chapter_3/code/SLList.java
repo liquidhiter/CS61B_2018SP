@@ -4,21 +4,21 @@
  */
 public class SLList<LochNess> implements List61B<LochNess>{
   private class StuffNode {
-    public LochNess item;
-    public StuffNode next;
+	public LochNess item;
+	public StuffNode next;
 
-    public StuffNode(LochNess i, StuffNode n) {
-      item = i;
-      next = n;
-    }
+	public StuffNode(LochNess i, StuffNode n) {
+	  item = i;
+	  next = n;
+	}
   }
 
   private StuffNode first;
   private int size;
 
   public SLList(LochNess x) {
-    first = new StuffNode(x, null);
-    size = 1;
+	first = new StuffNode(x, null);
+	size = 1;
   }
 
   /**
@@ -27,53 +27,53 @@ public class SLList<LochNess> implements List61B<LochNess>{
    */
   @Override
   public LochNess get(int i) {
-    if (size == 0) {
-      return null;
-    }
+	if (size == 0) {
+	  return null;
+	}
 
-    StuffNode node = first.next;
-    while (i > 0 && node.next != null) {
-      i -= 1;
-      node = node.next;
-    }
+	StuffNode node = first.next;
+	while (i > 0 && node.next != null) {
+	  i -= 1;
+	  node = node.next;
+	}
 
-    return node.item;
+	return node.item;
   }
 
   /** Adds x to the front of the list. */
   @Override
   public void addFirst(LochNess x) {
-    first = new StuffNode(x, first);
-    size += 1;
+	first = new StuffNode(x, first);
+	size += 1;
   }
 
   /** Returns the first item in the list. */
   @Override
   public LochNess getFirst() {
-    if (size == 0) {
-      return null;
-    }
+	if (size == 0) {
+	  return null;
+	}
 
-    return first.item;
+	return first.item;
   }
 
   /** Adds an item to the end of the list. */
   @Override
   public void addLast(LochNess x) {
-    if (size == 0) {
-      first = new StuffNode(x, first);
-    } else {
-      StuffNode p = first;
+	if (size == 0) {
+	  first = new StuffNode(x, first);
+	} else {
+	  StuffNode p = first;
 
-      /* Move p until it reaches the end of the list. */
-      while (p.next != null) {
-        p = p.next;
-      }
+	  /* Move p until it reaches the end of the list. */
+	  while (p.next != null) {
+		p = p.next;
+	  }
 
-      p.next = new StuffNode(x, null);
-    }
+	  p.next = new StuffNode(x, null);
+	}
 
-    size += 1;
+	size += 1;
   }
 
   /**
@@ -82,16 +82,16 @@ public class SLList<LochNess> implements List61B<LochNess>{
    */
   @Override
   public LochNess getLast() {
-    if (size == 0) {
-      return null;
-    }
+	if (size == 0) {
+	  return null;
+	}
 
-    StuffNode node = first;
-    while (node.next != null) {
-      node = node.next;
-    }
+	StuffNode node = first;
+	while (node.next != null) {
+	  node = node.next;
+	}
 
-    return node.item;
+	return node.item;
   }
 
   /**
@@ -100,30 +100,30 @@ public class SLList<LochNess> implements List61B<LochNess>{
    */
   @Override
   public LochNess removeLast() {
-    /* Need to find the second-to-last node
-     * Well, the single element list is a special case
-     * which results in an empty list and requires the addLast and getLast
-     * method to be updated
-     **/
-    if (size == 0) {
-      return null;
-    }
+	/* Need to find the second-to-last node
+	 * Well, the single element list is a special case
+	 * which results in an empty list and requires the addLast and getLast
+	 * method to be updated
+	 **/
+	if (size == 0) {
+	  return null;
+	}
 
-    LochNess returnVal;
-    if (size == 1) {
-      returnVal = first.item;
-      first = null;
-    } else {
-      StuffNode node = first;
-      for (int i = 1; i < size - 1; ++i) {
-        node = node.next;
-      }
-      returnVal = node.next.item;
-      node.next = null;
-    }
-    size -= 1;
+	LochNess returnVal;
+	if (size == 1) {
+	  returnVal = first.item;
+	  first = null;
+	} else {
+	  StuffNode node = first;
+	  for (int i = 1; i < size - 1; ++i) {
+		node = node.next;
+	  }
+	  returnVal = node.next.item;
+	  node.next = null;
+	}
+	size -= 1;
 
-    return returnVal;
+	return returnVal;
   }
 
   /**
@@ -133,25 +133,25 @@ public class SLList<LochNess> implements List61B<LochNess>{
    */
   @Override
   public void insert(LochNess item, int position) {
-    if (position < 0 || position > size) {
-      throw new IllegalArgumentException("Index out of range");
-    }
+	if (position < 0 || position > size) {
+	  throw new IllegalArgumentException("Index out of range");
+	}
 
-    StuffNode node = first;
-    /* Find the element at position - 1 */
-    // for (int i = 0; i < position - 1; ++i) {
-    //   node = node.next;
-    // }
-    while (position > 0 && node.next != null) {
-        position -= 1;
-        node = node.next;
-    }
+	StuffNode node = first;
+	/* Find the element at position - 1 */
+	// for (int i = 0; i < position - 1; ++i) {
+	//   node = node.next;
+	// }
+	while (position > 0 && node.next != null) {
+		position -= 1;
+		node = node.next;
+	}
 
-    /* Insert the new node */
-    StuffNode next = node.next;
-    node.next = new StuffNode(item, next);
+	/* Insert the new node */
+	StuffNode next = node.next;
+	node.next = new StuffNode(item, next);
 
-    size += 1;
+	size += 1;
   }
 
   /**
@@ -160,20 +160,20 @@ public class SLList<LochNess> implements List61B<LochNess>{
    */
   @Override
   public int size() {
-    return size;
+	return size;
   }
 
   @Override
   public void print() {
-    for (StuffNode node = first; node != null; node = node.next) {
-      System.out.print(node.item + " ");
-    }
+	for (StuffNode node = first; node != null; node = node.next) {
+	  System.out.print(node.item + " ");
+	}
   }
 
   public static void main(String[] args) {
-    List61B<String> someList = new SLList<String>("GURA");
-    someList.addFirst("elk");
+	List61B<String> someList = new SLList<String>("GURA");
+	someList.addFirst("elk");
 
-    someList.print();
+	someList.print();
   }
 }
