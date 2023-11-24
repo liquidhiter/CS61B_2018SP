@@ -1,0 +1,14 @@
+# Topic: More Java launguage stuff
+## Autoboxing and unboxing
+- primitive types and generic type arguments
+- implicit convertion between the primitive types and wrapper
+
+dis-advantages of using wrapper type for primitive ones
+- auto-boxing results in worse performance
+- arrays are never auto-boxed or auto-unboxed
+- wrapper types require much more memory than primitive ones
+
+## Immutabulity
+- similar concept as in Python: be immutable as it should be, e.x. tuple rather than list
+- final reference only guarantees that the reference itself is not changable, not the object
+
