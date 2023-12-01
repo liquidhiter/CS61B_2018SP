@@ -55,6 +55,41 @@ public class ArraySet<T> implements Iterable<T> {
         return size;
     }
 
+    @Override
+    public String toString() {
+        /* Naive solution: immutable string and always create new string */
+        // String formatString = "(";
+        // for (T x : items) {
+        //     formatString += x.toString() + ",";
+        // }
+        // formatString += ")";
+        // return formatString;
+        StringBuilder strBuilder = new StringBuilder("(");
+        // for (T x : items) {
+        //     if (x == null) {
+        //         strBuilder.append("null");
+        //     } else {
+        //         strBuilder.append(x.toString());
+        //     }
+        //     strBuilder.append(",");
+        // }
+        for (int i  = 0; i < size; ++i) {
+            T item = items[i];
+            if (item == null) {
+                strBuilder.append("null");
+            } else {
+                strBuilder.append(item.toString());
+            }
+
+            if (i < size - 1) {
+                strBuilder.append(",");
+            }
+        }
+        strBuilder.append(")");
+
+        return strBuilder.toString();
+    }
+
     /** returns an iterator (a.k.a. seer) */
     public Iterator<T> iterator() {
         return new ArraySetIterator();
@@ -85,17 +120,19 @@ public class ArraySet<T> implements Iterable<T> {
         s.add("fish");
         s.add("house");
         s.add("fish");
-        System.out.println(s.contains("horse"));
-        System.out.println(s.size());
+        // System.out.println(s.contains("horse"));
+        // System.out.println(s.size());
 
-        Iterator<String> iter = s.iterator();
-        while (iter.hasNext()) {
-            System.out.println(iter.next());
-        }
+        System.out.println(s);
 
-        for (String item : s) {
-            System.out.println(item);
-        }
+        // Iterator<String> iter = s.iterator();
+        // while (iter.hasNext()) {
+        //     System.out.println(iter.next());
+        // }
+
+        // for (String item : s) {
+        //     System.out.println(item);
+        // }
     }
 
     /* Also to do:
