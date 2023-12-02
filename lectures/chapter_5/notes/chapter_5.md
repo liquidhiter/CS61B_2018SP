@@ -86,3 +86,38 @@ public class ArraySet<T> implements Iterable<T> {
 - `Iterator` implements how the iteration is working, specifically defining methods of `hasNext()` and `next()`
   - `next()` is called when the `hasNext()` returns false: common convention is to throw the `NoSuchElementException`
   - `next()` can be called without calling the `hasNext()` method
+
+
+## `toString()` and `equals()`
+```java
+@Override
+public boolean equals(Object obj) {
+    /* self-equals */
+    if (this == obj) {
+        return true;
+    }
+
+    if (obj == null) {
+        return false;
+    }
+
+    /* comparable for same class */
+    if (obj.getClass() != this.getClass()) {
+        return false;
+    }
+
+    ArraySet<T> other = (ArraySet<T>) obj;
+    if (other.size() != this.size()) {
+        return false;
+    }
+
+    for (T item : this) {
+        if (!other.contains(item)) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+```
+- understand the difference between `==` and `equals`

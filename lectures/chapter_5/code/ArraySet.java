@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class ArraySet<T> implements Iterable<T> {
 
@@ -88,6 +90,52 @@ public class ArraySet<T> implements Iterable<T> {
         strBuilder.append(")");
 
         return strBuilder.toString();
+    }
+
+    public static <type> ArraySet<type> of(type... args) {
+        ArraySet<type> result = new ArraySet<>();
+        for (type t : args) {
+            result.add(t);
+        }
+
+        return result;
+    }
+    
+    /*@Override
+    public String toString() {
+        List<String> listOfItems = new ArrayList<String>();
+        for (T item : this) {
+            listOfItems.add(item.toString());
+        }
+        return "{" + String.join(",", listOfItems) + "}";
+    }*/
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null) {
+            return false;
+        }
+
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        ArraySet<T> other = (ArraySet<T>) obj;
+        if (other.size() != this.size()) {
+            return false;
+        }
+
+        for (T item : this) {
+            if (!other.contains(item)) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 
     /** returns an iterator (a.k.a. seer) */
