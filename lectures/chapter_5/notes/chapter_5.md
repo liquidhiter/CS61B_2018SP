@@ -121,3 +121,16 @@ public boolean equals(Object obj) {
 }
 ```
 - understand the difference between `==` and `equals`
+
+
+## Generic static methods
+```java
+public static <type> ArraySet<type> of(type... args) {
+    ArraySet<type> result = new ArraySet<>();
+    for (type t : args) {
+        result.add(t);
+    }
+
+    return result;
+}
+```

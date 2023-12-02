@@ -100,7 +100,7 @@ public class ArraySet<T> implements Iterable<T> {
 
         return result;
     }
-    
+
     /*@Override
     public String toString() {
         List<String> listOfItems = new ArrayList<String>();
