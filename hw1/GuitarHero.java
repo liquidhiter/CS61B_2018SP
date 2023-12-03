@@ -2,10 +2,10 @@ import synthesizer.GuitarString;
 
 public class GuitarHero {
 
-    private final static String keyboard = "q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' ";
+    private static final String KEYBOARD = "q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' ";
 
     public static void main(String[] args) {
-        int numOfKeys = keyboard.length();
+        int numOfKeys = KEYBOARD.length();
         GuitarString[] soundData = new GuitarString[numOfKeys];
 
         while (true) {
@@ -13,7 +13,7 @@ public class GuitarHero {
             /* check if the user has typed a key; if so, process it */
             if (StdDraw.hasNextKeyTyped()) {
                 char key = StdDraw.nextKeyTyped();
-                int idxOfKey = keyboard.indexOf(key);
+                int idxOfKey = KEYBOARD.indexOf(key);
                 if (idxOfKey > -1) {
                     double freq = 440.0 * Math.pow(2.0, (idxOfKey - 24.0) / 12.0);
                     GuitarString newSound = new synthesizer.GuitarString(freq);

@@ -1,5 +1,4 @@
 package synthesizer;
-import synthesizer.AbstractBoundedQueue;
 
 import java.util.Iterator;
 
@@ -26,7 +25,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
      * throw new RuntimeException("Ring buffer overflow"). Exceptions
      * covered Monday.
      */
-    public void enqueue(T x) throws RuntimeException{
+    public void enqueue(T x) throws RuntimeException {
         if (isFull()) {
             throw new RuntimeException("Ring buffer overflow");
         }
@@ -46,7 +45,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
      * throw new RuntimeException("Ring buffer underflow"). Exceptions
      * covered Monday.
      */
-    public T dequeue() throws RuntimeException{
+    public T dequeue() throws RuntimeException {
         if (isEmpty()) {
             throw new RuntimeException("Ring buffer underflow");
         }
