@@ -33,15 +33,29 @@ public class HexWorld {
      * @param size
      * @param item
      */
-    private void addRow(TETile[] line, int startPos, int size, TETile item) {
+    private static void addRow(TETile[][] tiles, Position p, int size, TETile item) {
         for (int i = 0; i < size; ++i) {
-            line[startPos + i] = item;
+            tiles[p.xPos + i][p.yPos] = item;
         }
     }
 
-    private Position calStartPos(Position p) {
-        int startXPos = p.xPos - 1;
-        int startYPos = p.yPos - 1;
+    /**
+     *
+     * @param direction
+     * @param p
+     * @return
+     */
+    private static Position calStartPos(int direction, Position p) {
+        int startXPos = p.xPos;
+        int startYPos = p.yPos;
+
+        if (direction > 0) {
+            startXPos -= 1;
+        } else if (direction < 0) {
+            startXPos += 1;
+        }
+        startYPos += 1;
+
         if (startXPos < 0 || startYPos < 0) {
             throw new RuntimeException("Invalid position: (" + p.xPos + ", " + p.yPos + ")");
         }
@@ -50,16 +64,31 @@ public class HexWorld {
     }
 
     /**
-     *
+     * Helper function to return whether increase or decrease the number of items in the line
      * @param indexOfLine
      * @param numOfLines
      * @return
      */
-    private int calSizeStep(int indexOfLine, int numOfLines) {
-        int middleLine = (numOfLines - 1) / 2;
+    private static int getDirection(int indexOfLine, int numOfLines) {
+        int middleLine = (numOfLines - 1) >> 1;
         if (indexOfLine < middleLine) {
-            return +2;
+            return +1;
         } else if (indexOfLine == middleLine) {
+            return 0;
+        } else {
+            return -1;
+        }
+    }
+
+    /**
+     *
+     * @param direction
+     * @return
+     */
+    private static int calSizeStep(int direction) {
+        if (direction > 0) {
+            return +2;
+        } else if (direction == 0) {
             return 0;
         } else {
             return -2;
@@ -72,39 +101,45 @@ public class HexWorld {
      * @param p: bottom left-most
      * @param size
      */
-    public void addHexagon(TETile[][] tiles, Position p, int size, TETile item) {
+    public static void addHexagon(TETile[][] tiles, Position p, int size, TETile item) {
         assert(tiles != null && tiles.length >= 4 && tiles[0].length >= 4);
         assert(size >= 2);
 
         int numOfLines = size << 1;
+        int direction = 0;
+        Position startPos = p;
         for (int i = 0; i < numOfLines; ++i) {
-            /* Increment of the size */
-            int step = calSizeStep(i, numOfLines);
             /* Calculate the start position in the row */
-            Position startPos = calStartPos(p);4                                                                                                                                                                                                                                                                                 g
+            startPos = calStartPos(direction, startPos);
             /* Add row */
-            addRow(tiles[tiles.length - startPos.yPos], startPos.xPos, size, item);
+            addRow(tiles, startPos, size, item);
+            /* Get the direction to determine increase or decrease of the line */
+            direction = getDirection(i, numOfLines);
+            /* Increment of the size */
+            int step = calSizeStep(direction);
             size += step;
         }
-
     }
 
-    @Test
-    public void testCalSizeStep() {
-        assertEquals(2, calSizeStep(0, 4));
-        assertEquals(0, calSizeStep(1, 4));
-        assertEquals(-2, calSizeStep(2, 4));
-
-        assertEquals(2, calSizeStep(0, 6));
-        assertEquals(2, calSizeStep(1, 6));
-        assertEquals(0, calSizeStep(2, 6));
-        assertEquals(-2, calSizeStep(3, 6));
-        assertEquals(-2, calSizeStep(4, 6));
+    public static void debug(TERenderer ter, TETile[][] world) {
+        // draws the world to the screen
+        ter.renderFrame(world);
     }
-
 
     public static void main(String[] args) {
         TERenderer ter = new TERenderer();
         ter.initialize(WIDTH, HEIGHT);
+
+        TETile[][] hexagons = new TETile[WIDTH][HEIGHT];
+        for (int x = 0; x < WIDTH; x += 1) {
+            for (int y = 0; y < HEIGHT; y += 1) {
+                hexagons[x][y] = Tileset.NOTHING;
+            }
+        }
+
+        addHexagon(hexagons, new Position(5, 5), 5, Tileset.FLOWER);
+
+        // draws the world to the screen
+        ter.renderFrame(hexagons);
     }
 }

@@ -25,11 +25,14 @@ public class BoringWorldDemo {
         }
 
         // fills in a block 14 tiles wide by 4 tiles tall
-        for (int x = 20; x < 35; x += 1) {
-            for (int y = 5; y < 10; y += 1) {
-                world[x][y] = Tileset.WALL;
-            }
-        }
+//        for (int x = 20; x < 35; x += 1) {
+//            for (int y = 5; y < 10; y += 1) {
+//                world[x][y] = Tileset.WALL;
+//            }
+//        }
+        world[0][0] = Tileset.WALL;
+        world[0][1] = Tileset.WALL;
+        world[1][0] = Tileset.WALL;
 
         // draws the world to the screen
         ter.renderFrame(world);

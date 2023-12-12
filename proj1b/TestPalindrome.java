@@ -96,7 +96,7 @@ public class TestPalindrome {
         String isPalindromeD = "saippuakivikauppias";
         assertTrue(palindrome.isPalindrome(isPalindromeD));
 //        assertTrue(palindrome.isPalindrome(isPalindromeD, 0, isPalindromeD.length() - 1));
-    }
+    } 
 
     @Test
     public void testIsPalindromeWithComparator() {
