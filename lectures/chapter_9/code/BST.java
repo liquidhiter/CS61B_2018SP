@@ -404,23 +404,11 @@ public class BST<Key extends Comparable<Key>, Value> {
             n.left = delete(n.left, k);
         } else {
             /* the current node is the one to be deleted */
-
-            /**
-            // case 1: leaf node, safe to delete
-            if (n.left == null && n.right == null) {
-                n = null;
-            // case 2: non-leaf node, easier to delete
-            } else if (n.left == null && n.right != null) {
-                n = n.right;
-            } else if (n.left != null && n.right == null) {
-                n = n.left;
-             */
-            
             // case 1 & 2: leaf node or parent nodes
             if (n.left == null) {
-                n = n.right;
+                return n.right;
             } else if (n.right == null) {
-                n = n.left;
+                return n.left;
             // case 3: root node
             } else  {
                 /* First save the current node */
