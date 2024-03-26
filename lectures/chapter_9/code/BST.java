@@ -1,3 +1,7 @@
+import java.util.Random;
+import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.Queue;
+
 public class BST<Key extends Comparable<Key>, Value> {
     private Node root;
 
@@ -433,6 +437,78 @@ public class BST<Key extends Comparable<Key>, Value> {
         return n;
     }
 
+    /**
+     * Print the BST in inorder
+     */
+    public void printInOrder() {
+        printInOrder(root);
+    }
+
+    /**
+     * 
+     * @param n
+     */
+    private void printInOrder(Node n) {
+        if (n == null) {
+            return;
+        }
+
+        /* Print the left subtree */
+        printInOrder(n.left);
+        /* Print the root node */
+        StdOut.println(n.key);
+        /* Print the right subtree */
+        printInOrder(n.right);
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public Iterable<Key> keys() {
+        return keys(min(), max());
+    }
+
+    /**
+     * 
+     * @param lo
+     * @param hi
+     * @return
+     */
+    public Iterable<Key> keys(Key lo, Key hi) {
+        Queue<Key> queue = new Queue<>();
+        keys(root, queue, lo, hi);
+        return queue;
+    }
+
+    /**
+     * !NOTE: first left subtree, then root node, last right subtree (InOrder)
+     * @param n
+     * @param queue
+     * @param lo
+     * @param hi
+     */
+    private void keys(Node n, Queue<Key> queue, Key lo, Key hi) {
+        if (n == null) {
+            return;
+        }
+
+        int cmpToLo = lo.compareTo(n.key);
+        int cmpToHigh =hi.compareTo(n.key);
+        /* Case 1: if lo is smaller than the current node's key, go to the left subtree */
+        if (cmpToLo < 0) {
+            keys(n.left, queue, lo, hi);
+        }
+        /* Case 2: if lo <= current node's key <= hi, add the current node's key to the queue */
+        if (cmpToLo <= 0 && cmpToHigh >= 0) {
+            queue.enqueue(n.key);
+        }
+        /* Case 3: if hi is larger than the current node's key, go to the right subtree */
+        if (cmpToHigh > 0) {
+            keys(n.right, queue, lo, hi);
+        }
+    }
+
     public static void main(String[] args) {
         System.out.println(
             "************************** Test BST.java **************************\n"
@@ -498,5 +574,21 @@ public class BST<Key extends Comparable<Key>, Value> {
         assert(bst.size() == 1);
         assert(bst.min() == "p");
         System.out.println("PASS!");
+
+        /* Generate a random BST and print it */
+        BST<Character, Integer> bstInOrder = new BST<>();
+        Random keyGen = new Random();
+        // keyGen.setSeed(0x12345678);
+
+        int keyBaseVal = (int)'A';
+        int keyRange = (int)('Z' - 'A' + 1);
+        for (int i = 0; i < keyRange; ++i) {
+            char key = (char)((keyGen.nextInt(1024) % keyRange) + keyBaseVal);
+            bstInOrder.put(key, keyGen.nextInt());
+        }
+        assert(bstInOrder.size() == keyRange);
+        bstInOrder.printInOrder();
+
+        Queue<Character> queue = bstInOrder.keys();
     }
 }
