@@ -580,15 +580,21 @@ public class BST<Key extends Comparable<Key>, Value> {
         Random keyGen = new Random();
         // keyGen.setSeed(0x12345678);
 
-        int keyBaseVal = (int)'A';
-        int keyRange = (int)('Z' - 'A' + 1);
-        for (int i = 0; i < keyRange; ++i) {
-            char key = (char)((keyGen.nextInt(1024) % keyRange) + keyBaseVal);
-            bstInOrder.put(key, keyGen.nextInt());
-        }
-        assert(bstInOrder.size() == keyRange);
-        bstInOrder.printInOrder();
+        for (int j = 0; j < 2; ++j) {
+            StdOut.println("====================== Iteration " + j + " ======================");
+            int keyBaseVal = (int)'A';
+            int keyRange = (int)('Z' - 'A' + 1);
+            for (int i = 0; i < keyRange; ++i) {
+                char key = (char)((keyGen.nextInt(1024) % keyRange) + keyBaseVal);
+                bstInOrder.put(key, keyGen.nextInt());
+            }
+            assert(bstInOrder.size() == keyRange);
+            // bstInOrder.printInOrder();
 
-        Queue<Character> queue = bstInOrder.keys();
+            for (char key : bstInOrder.keys()) {
+                StdOut.print(key + " ");
+            }
+            StdOut.println('\n');
+        }
     }
 }
