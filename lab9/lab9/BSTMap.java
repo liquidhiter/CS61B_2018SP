@@ -150,7 +150,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
             root.right = remove(key, root.right, val, isValMatched);
         } else {
             /* Do nothing if the value doesn't match only when value matters */
-            if (isValMatched && root.value != val) {
+            if (isValMatched && !root.value.equals(val)) {
                 return root;
             }
 
@@ -183,7 +183,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
     private V removeHelper(K key, Node p, V val, boolean isValMatched) {
         V ret = get(key);
         root = remove(key, root, val, isValMatched);
-        return isValMatched ? (ret == val) ? ret : null : ret;
+        return isValMatched ? (ret.equals(val)) ? ret : null : ret;
     }
 
     /** Removes KEY from the tree if present
