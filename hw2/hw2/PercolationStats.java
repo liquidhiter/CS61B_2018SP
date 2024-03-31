@@ -41,10 +41,12 @@ public class PercolationStats {
         }
 
         /* Logging for fun */
-        StdOut.println("[INFO] >>>>>> " + "simulation is processing, the system percolates with open sites of " + p.numberOfOpenSites());
+//        StdOut.println("[INFO] >>>>>> " +
+//                "simulation is processing, the system percolates with open sites of " +
+//                p.numberOfOpenSites());
 
         /* Calculate the test result */
-        return p.numberOfOpenSites() / (double)(gridSize * gridSize);
+        return p.numberOfOpenSites() / (double) (gridSize * gridSize);
     }
 
     /**
@@ -119,17 +121,19 @@ public class PercolationStats {
         return mean() + 1.96 / Math.sqrt(iterations) * stddev();
     }
 
-    public static void main(String[] args) {
-        PercolationFactory pf = new PercolationFactory();
-        int N = 20;
-        int T = 1000000;
-        PercolationStats test = new PercolationStats(N, T, pf);
-        StdOut.println("********************************************* Experiment Result *********************************************");
-        StdOut.println("Grid size: " + N + "-by-" + N + '\n' + "Iterations: " + T);
-        StdOut.println("Test Results: ");
-        StdOut.println("             Mean threshold " + test.mean());
-        StdOut.println("             Standard deviation " + test.stddev());
-        StdOut.println("             confidence interval [" + test.confidenceLow() + ", " + test.confidenceHigh() + "]");
-    }
+//    public static void main(String[] args) {
+//        PercolationFactory pf = new PercolationFactory();
+//        int N = 20;
+//        int T = 1000000;
+//        PercolationStats test = new PercolationStats(N, T, pf);
+//        StdOut.println("********************************************* Experiment Result " +
+//                "*********************************************");
+//        StdOut.println("Grid size: " + N + "-by-" + N + '\n' + "Iterations: " + T);
+//        StdOut.println("Test Results: ");
+//        StdOut.println("             Mean threshold " + test.mean());
+//        StdOut.println("             Standard deviation " + test.stddev());
+//        StdOut.println("             confidence interval [" + test.confidenceLow() + ", "
+//                + test.confidenceHigh() + "]");
+//    }
 
 }

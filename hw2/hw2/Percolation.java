@@ -56,8 +56,8 @@ public class Percolation {
      * @return
      */
     private int xyToIndex(int row, int col) {
-       validateIndex(row, col);
-       return row * size + col;
+        validateIndex(row, col);
+        return row * size + col;
     }
 
     /**
@@ -122,7 +122,7 @@ public class Percolation {
      * @param row
      * @param col
      */
-    void open(int row, int col) {
+    public void open(int row, int col) {
         validateIndex(row, col);
 
         /* Save the status of the site to open */
@@ -139,7 +139,7 @@ public class Percolation {
      * @param col
      * @return
      */
-    boolean isOpen(int row, int col) {
+    public boolean isOpen(int row, int col) {
         validateIndex(row, col);
         return sites[xyToIndex(row, col)] > 0;
     }
@@ -150,7 +150,7 @@ public class Percolation {
      * @param col
      * @return
      */
-    boolean isFull(int row, int col) {
+    public boolean isFull(int row, int col) {
         /* Conditions to be full:
          * 1> must be open
          * 2> any of the neighbours must be connected ? (be careful with the boundary)
@@ -175,7 +175,7 @@ public class Percolation {
      * Number of open sites
      * @return
      */
-    int numberOfOpenSites() {
+    public int numberOfOpenSites() {
         return numOfSitesOpen;
     }
 
@@ -183,7 +183,7 @@ public class Percolation {
      * Does the system percolate?
      * @return
      */
-    boolean percolates() {
+    public boolean percolates() {
         /* Check if there is a full site at the bottom row */
         for (int i = 0; i < size; ++i) {
             if (isFull(size - 1, i)) {
@@ -194,16 +194,16 @@ public class Percolation {
         return false;
     }
 
-    public static void main(String[] args) {
-        Percolation test = new Percolation(5);
-        test.open(4, 4);
-        test.open(3, 4);
-        test.open(2, 4);
-        test.open(2, 2);
-        test.open(2, 3);
-        test.open(0, 2);
-        test.open(1, 2);
-
-        test.isFull(2, 2);
-    }
+//    public static void main(String[] args) {
+//        Percolation test = new Percolation(5);
+//        test.open(4, 4);
+//        test.open(3, 4);
+//        test.open(2, 4);
+//        test.open(2, 2);
+//        test.open(2, 3);
+//        test.open(0, 2);
+//        test.open(1, 2);
+//
+//        test.isFull(2, 2);
+//    }
 }
