@@ -25,7 +25,7 @@ public class Percolation {
      */
     private void init(int N) {
         if (N <= 0) {
-            throw new IndexOutOfBoundsException("Grid size must be positive!");
+            throw new IllegalArgumentException("Grid size must be positive!");
         }
 
         /* O(N^2) */
@@ -126,8 +126,10 @@ public class Percolation {
         validateIndex(row, col);
 
         /* Save the status of the site to open */
-        sites[xyToIndex(row, col)] = 1;
-        numOfSitesOpen += 1;
+        if (!isOpen(row, col)) {
+            sites[xyToIndex(row, col)] = 1;
+            numOfSitesOpen += 1;
+        }
 
         /* Connect its neighbours ? */
         connectNeighbours(row, col);
@@ -194,7 +196,7 @@ public class Percolation {
         return false;
     }
 
-//    public static void main(String[] args) {
+    public static void main(String[] args) {
 //        Percolation test = new Percolation(5);
 //        test.open(4, 4);
 //        test.open(3, 4);
@@ -205,5 +207,5 @@ public class Percolation {
 //        test.open(1, 2);
 //
 //        test.isFull(2, 2);
-//    }
+    }
 }
