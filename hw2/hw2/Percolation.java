@@ -28,6 +28,7 @@ public class Percolation {
             throw new IndexOutOfBoundsException("Grid size must be positive!");
         }
 
+        /* O(N^2) */
         sites = new int[N * N];
         unions = new WeightedQuickUnionUF(N * N);
     }
