@@ -168,18 +168,8 @@ public class Percolation {
      * @return
      */
     public boolean isFull(int row, int col) {
-        /* Conditions to be full:
-         * 1> must be open
-         * 2> any of the neighbours must be connected ? (be careful with the boundary)
-         */
-
-        /* First check if the site is open */
-        if (!isOpen(row, col)) {
-            return false;
-        }
-
         /* O(1) */
-        return unions.connected(xyToIndex(row, col), 0);
+        return isOpen(row, col) && unions.connected(xyToIndex(row, col), 0);
     }
 
     /**
