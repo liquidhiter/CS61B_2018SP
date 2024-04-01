@@ -28,12 +28,12 @@ public class Percolation {
             throw new IllegalArgumentException("Grid size must be positive!");
         }
 
-        sites = new int[N*N + 2];
+        sites = new int[N * N + 2];
         /* Virtual top site and bottom site are always open by default */
         sites[0] = 1;
-        sites[N*N + 1] = 1;
+        sites[N * N + 1] = 1;
         /* Virtual top site and bottom site to accelerate the isFull() and Percolate()  */
-        unions = new WeightedQuickUnionUF(N*N + 2);
+        unions = new WeightedQuickUnionUF(N * N + 2);
     }
 
     /**
@@ -144,8 +144,9 @@ public class Percolation {
         if (row == 0) {
             unions.union(0, xyToIndex(row, col));
         }
-        /* For any open sites in bottom row, connect it to the virtual bottom site */
-        else if (row == size - 1) {
+        /* Corner case: when N = 1, bottom should also be connected */
+        if (row == size - 1) {
+            /* For any open sites in bottom row, connect it to the virtual bottom site */
             unions.union(size * size + 1, xyToIndex(row, col));
         }
     }
@@ -168,6 +169,11 @@ public class Percolation {
      * @return
      */
     public boolean isFull(int row, int col) {
+        if (row == 0) {
+            return isOpen(row, col);
+        }
+
+        //TODO: fix the backwash issue
         /* O(1) */
         return isOpen(row, col) && unions.connected(xyToIndex(row, col), 0);
     }
@@ -203,6 +209,5 @@ public class Percolation {
 //        assert(!test.isFull(2, 4));
 //        assert(!test.isFull(3, 4));
 //        assert(!test.isFull(4, 4));
-
     }
 }
