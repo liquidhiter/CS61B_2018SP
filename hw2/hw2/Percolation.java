@@ -3,8 +3,9 @@ package hw2;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
-    private int[] sites; /* Open-ness */
-    private WeightedQuickUnionUF unions; /* Connectedness */
+    private boolean[] sites; /* Open-ness */
+    private WeightedQuickUnionUF unions; /* Top and bottom rows are connected, Connectedness */
+    private WeightedQuickUnionUF full; /* Top rows are connected, should be only used by isFull */
     private int numOfSitesOpen;
     private int size; /* rows / columns */
 
@@ -28,12 +29,22 @@ public class Percolation {
             throw new IllegalArgumentException("Grid size must be positive!");
         }
 
-        sites = new int[N * N + 2];
-        /* Virtual top site and bottom site are always open by default */
-        sites[0] = 1;
-        sites[N * N + 1] = 1;
+        sites = new boolean[N * N];
+        /* All sites are blocked by default */
+        for (int i = 0; i < N * N; i++) {
+            sites[i] = false;
+        }
+
         /* Virtual top site and bottom site to accelerate the isFull() and Percolate()  */
-        unions = new WeightedQuickUnionUF(N * N + 2);
+        unions = new WeightedQuickUnionUF(N * N);
+        full = new WeightedQuickUnionUF(N * N);
+        for (int i = 0; i < N - 1; ++i) {
+            /* Connect the top and bottom rows */
+            unions.union(xyToIndex(0, i), xyToIndex(0, i + 1));
+            unions.union(xyToIndex(N - 1, i), xyToIndex(N - 1, i + 1));
+            /* Connect the top rows only */
+            full.union(xyToIndex(0, i), xyToIndex(0, i + 1));
+        }
     }
 
     /**
@@ -60,64 +71,7 @@ public class Percolation {
      */
     private int xyToIndex(int row, int col) {
         validateIndex(row, col);
-        return row * size + col + 1;
-    }
-
-    /**
-     *
-     * @param row
-     * @param col
-     */
-    private void connectLeft(int row, int col) {
-        for (int i = col - 1; i >= 0 && isOpen(row, i); --i) {
-            unions.union(xyToIndex(row, i + 1), xyToIndex(row, i));
-        }
-    }
-
-    /**
-     *
-     * @param row
-     * @param col
-     */
-    private void connectRight(int row, int col) {
-        for (int i = col + 1; i <= size - 1 && isOpen(row, i); ++i) {
-            unions.union(xyToIndex(row, i - 1), xyToIndex(row, i));
-        }
-    }
-
-    /**
-     *
-     * @param row
-     * @param col
-     */
-    private void connectBottom(int row, int col) {
-        for (int i = row + 1; i <= size - 1 && isOpen(i, col); ++i) {
-            unions.union(xyToIndex(i - 1, col), xyToIndex(i, col));
-        }
-    }
-
-    /**
-     *
-     * @param row
-     * @param col
-     */
-    private void connectUp(int row, int col) {
-        for (int i = row - 1; i >= 0 && isOpen(i, col); --i) {
-            unions.union(xyToIndex(i + 1, col), xyToIndex(i, col));
-        }
-    }
-
-    /**
-     * from top to bottom, left to right ?
-     * @param row
-     * @param col
-     */
-    private void connectNeighbours(int row, int col) {
-        /* left / right / bottom / up */
-        connectLeft(row, col);
-        connectRight(row, col);
-        connectBottom(row, col);
-        connectUp(row, col);
+        return row * size + col;
     }
 
     /**
@@ -134,20 +88,33 @@ public class Percolation {
         }
 
         /* Only increase the number of open sites when it is not open */
-        sites[xyToIndex(row, col)] = 1;
+        sites[xyToIndex(row, col)] = true;
         numOfSitesOpen += 1;
 
         /* Connect to the neighbors */
-        connectNeighbours(row, col);
-
-        /* For any open sites in top row, connect it to the virtual top site */
-        if (row == 0) {
-            unions.union(0, xyToIndex(row, col));
+        /* Up: (row + 1, col)
+         * Bottom: (row - 1, col)
+         * Left: (row, col - 1)
+         * Right: (row, col + 1)
+         */
+        if (row > 0 && isOpen(row - 1, col)) {
+            unions.union(xyToIndex(row, col), xyToIndex(row - 1, col));
+            full.union(xyToIndex(row, col), xyToIndex(row - 1, col));
         }
-        /* Corner case: when N = 1, bottom should also be connected */
-        if (row == size - 1) {
-            /* For any open sites in bottom row, connect it to the virtual bottom site */
-            unions.union(size * size + 1, xyToIndex(row, col));
+
+        if (row < size - 1 && isOpen(row + 1, col)) {
+            unions.union(xyToIndex(row, col), xyToIndex(row + 1, col));
+            full.union(xyToIndex(row, col), xyToIndex(row + 1, col));
+        }
+
+        if (col > 0 && isOpen(row, col - 1)) {
+            unions.union(xyToIndex(row, col), xyToIndex(row, col -  1));
+            full.union(xyToIndex(row, col), xyToIndex(row, col - 1));
+        }
+
+        if (col < size - 1 && isOpen(row, col + 1)) {
+            unions.union(xyToIndex(row, col), xyToIndex(row, col + 1));
+            full.union(xyToIndex(row, col), xyToIndex(row, col + 1));
         }
     }
 
@@ -159,7 +126,7 @@ public class Percolation {
      */
     public boolean isOpen(int row, int col) {
         validateIndex(row, col);
-        return sites[xyToIndex(row, col)] > 0;
+        return sites[xyToIndex(row, col)];
     }
 
     /**
@@ -169,13 +136,8 @@ public class Percolation {
      * @return
      */
     public boolean isFull(int row, int col) {
-        if (row == 0) {
-            return isOpen(row, col);
-        }
-
-        //TODO: fix the backwash issue
         /* O(1) */
-        return isOpen(row, col) && unions.connected(xyToIndex(row, col), 0);
+        return isOpen(row, col) && full.connected(xyToIndex(row, col), 0);
     }
 
     /**
@@ -191,7 +153,7 @@ public class Percolation {
      * @return
      */
     public boolean percolates() {
-        return unions.connected(0, size * size + 1);
+        return unions.connected(0, xyToIndex(size - 1, size - 1));
     }
 
     public static void main(String[] args) {
