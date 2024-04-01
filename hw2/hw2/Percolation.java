@@ -28,9 +28,9 @@ public class Percolation {
             throw new IllegalArgumentException("Grid size must be positive!");
         }
 
-        /* O(N^2) */
         sites = new int[N * N];
-        unions = new WeightedQuickUnionUF(N * N);
+        /* Virtual top site and bottom site to accelerate the isFull() and Percolate()  */
+        unions = new WeightedQuickUnionUF(N * N + 2);
     }
 
     /**
@@ -57,7 +57,8 @@ public class Percolation {
      */
     private int xyToIndex(int row, int col) {
         validateIndex(row, col);
-        return row * size + col;
+        /* first site is the virtual top site */
+        return row * size + col + 1;
     }
 
     /**
@@ -131,8 +132,17 @@ public class Percolation {
             numOfSitesOpen += 1;
         }
 
-        /* Connect its neighbours ? */
+        /* Connect to the neighbors */
         connectNeighbours(row, col);
+
+        /* For any open sites in top row, connect it to the virtual top site */
+        if (row == 0) {
+            unions.union(0, xyToIndex(row, col));
+        }
+        /* For any open sites in bottom row, connect it to the virtual bottom site */
+        else if (row == size - 1) {
+            unions.union(size * size + 1, xyToIndex(row, col));
+        }
     }
 
     /**
