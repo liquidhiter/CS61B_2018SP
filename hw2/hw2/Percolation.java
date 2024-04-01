@@ -153,7 +153,8 @@ public class Percolation {
      * @return
      */
     public boolean percolates() {
-        return unions.connected(0, xyToIndex(size - 1, size - 1));
+        /* size might be 1, which needs to be checked by isOpen at first */
+        return isOpen(size - 1, size - 1) && unions.connected(0, xyToIndex(size - 1, size - 1));
     }
 
     public static void main(String[] args) {
