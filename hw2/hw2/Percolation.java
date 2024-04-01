@@ -128,11 +128,14 @@ public class Percolation {
     public void open(int row, int col) {
         validateIndex(row, col);
 
-        /* Save the status of the site to open */
-        if (!isOpen(row, col)) {
-            sites[xyToIndex(row, col)] = 1;
-            numOfSitesOpen += 1;
+        /* Do nothing if the site (row, col) is open already */
+        if (isOpen(row, col)) {
+            return;
         }
+
+        /* Only increase the number of open sites when it is not open */
+        sites[xyToIndex(row, col)] = 1;
+        numOfSitesOpen += 1;
 
         /* Connect to the neighbors */
         connectNeighbours(row, col);
