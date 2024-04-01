@@ -197,14 +197,19 @@ public class Percolation {
 
     public static void main(String[] args) {
 //        Percolation test = new Percolation(5);
-//        test.open(4, 4);
-//        test.open(3, 4);
-//        test.open(2, 4);
-//        test.open(2, 2);
-//        test.open(2, 3);
 //        test.open(0, 2);
 //        test.open(1, 2);
+//        test.open(2, 2);
+//        test.open(3, 2);
+//        test.open(4, 2);
+//        assert(test.percolates());
 //
-//        test.isFull(2, 2);
+//        test.open(2, 4);
+//        test.open(3, 4);
+//        test.open(4, 4);
+//        assert(!test.isFull(2, 4));
+//        assert(!test.isFull(3, 4));
+//        assert(!test.isFull(4, 4));
+
     }
 }
