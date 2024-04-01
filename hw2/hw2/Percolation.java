@@ -153,8 +153,11 @@ public class Percolation {
      * @return
      */
     public boolean percolates() {
-        /* size might be 1, which needs to be checked by isOpen at first */
-        return isOpen(size - 1, size - 1) && unions.connected(0, xyToIndex(size - 1, size - 1));
+        /* Corner case: the system percolates only when the (0,0) is open for 1x1 grid */
+        if (size == 1) {
+            return isOpen(0, 0);
+        }
+        return unions.connected(0, xyToIndex(size - 1, size - 1));
     }
 
     public static void main(String[] args) {
@@ -172,5 +175,11 @@ public class Percolation {
 //        assert(!test.isFull(2, 4));
 //        assert(!test.isFull(3, 4));
 //        assert(!test.isFull(4, 4));
+
+        // corner case
+//        Percolation test = new Percolation(1);
+//        System.out.println(test.percolates());
+//        test.open(0, 0);
+//        System.out.println(test.percolates());
     }
 }
