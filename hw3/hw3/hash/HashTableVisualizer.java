@@ -14,22 +14,42 @@ public class HashTableVisualizer {
            nicely, be sure to try
            scale = 0.5, N = 2000, M = 100. */
 
-        double scale = 1.0;
-        int N = 100;
-        int M = 10;
+        double scale = 0.2;
+        int N = 1000;
+        int M = 256;
 
         HashTableDrawingUtility.setScale(scale);
+        /*
         List<Oomage> oomies = new ArrayList<>();
         for (int i = 0; i < N; i += 1) {
            oomies.add(SimpleOomage.randomSimpleOomage());
         }
-        visualize(oomies, M, scale);
+        visualize(oomies, M, scale); */
+
+        List<ComplexOomage> coomies = new ArrayList<>();
+        for (int i = 0; i < N; i += 1) {
+            coomies.add(ComplexOomage.randomComplexOomage());
+        }
+        visualize(coomies, M, scale);
     }
 
+    /*
     public static void visualize(List<Oomage> oomages, int M, double scale) {
         HashTableDrawingUtility.drawLabels(M);
         int[] numInBucket = new int[M];
         for (Oomage s : oomages) {
+            int bucketNumber = (s.hashCode() & 0x7FFFFFFF) % M;
+            double x = HashTableDrawingUtility.xCoord(numInBucket[bucketNumber]);
+            numInBucket[bucketNumber] += 1;
+            double y = HashTableDrawingUtility.yCoord(bucketNumber, M);
+            s.draw(x, y, scale);
+        }
+    } */
+
+    public static void visualize(List<ComplexOomage> cooomages, int M, double scale) {
+        HashTableDrawingUtility.drawLabels(M);
+        int[] numInBucket = new int[M];
+        for (ComplexOomage s : cooomages) {
             int bucketNumber = (s.hashCode() & 0x7FFFFFFF) % M;
             double x = HashTableDrawingUtility.xCoord(numInBucket[bucketNumber]);
             numInBucket[bucketNumber] += 1;
