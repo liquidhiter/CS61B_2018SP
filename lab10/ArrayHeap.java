@@ -195,16 +195,19 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
             return null;
         }
 
-        /* when size == 1, swap itself really doesn't matter */
         /* Swap the node at the root and the bottom */
-        swap(ROOT, size);
+        if (size > 1) {
+            swap(ROOT, size);
+        }
 
         /* Nulling out the minimum before sink */
         T val = getNode(size).item();
         contents[size] = null;
 
-        /* Sink the new root if necessary */
-        sink(ROOT);
+        if (size > 1) {
+            /* Sink the new root if necessary */
+            sink(ROOT);
+        }
 
         size -= 1;
 
