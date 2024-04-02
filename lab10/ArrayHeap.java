@@ -138,15 +138,13 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         int right = rightIndex(index);
         /* Node with smaller priority bubble up */
         int minIndex = min(left, right);
+        if (minIndex > size) {
+            return;
+        }
 
         if (min(index, minIndex) == minIndex) {
             /* Node at index is sinked to minIndex */
             swap(index, minIndex);
-
-            /* Already at the bottom, no more sink */
-            if (minIndex == size) {
-                return;
-            }
 
             /* Sink until reaching out to the bottom */
             sink(minIndex);
@@ -561,5 +559,5 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         launcher.testInsertAndRemoveOnce();
         launcher.testInsertAndRemoveAllButLast();
         launcher.testChangePriority();
-    }*/
+    } */
 }
