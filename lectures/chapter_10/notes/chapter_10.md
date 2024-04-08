@@ -638,10 +638,6 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
 }
 ```
 
-
-
-
-
 ## Advanced Trees
 ### traversals
 - depth first traversals
@@ -698,7 +694,7 @@ public void PostOrder(BSTNode x) {
   - `software entities should be open for extension, but closed for modification`
   - reference: https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle
 
-### visitor pattern
+#### visitor pattern
 
 - *A **visitor pattern** is a [software design pattern](https://en.wikipedia.org/wiki/Software_design_pattern) that separates the [algorithm](https://en.wikipedia.org/wiki/Algorithm) from the [object](https://en.wikipedia.org/wiki/Object_(computer_science)) structure. Because of this separation new operations can be added to existing object structures without modifying the structures.*
 - reference:
@@ -728,5 +724,86 @@ class FindPig implements Action<String> {
 }
 
 preorderTraverse(tree, new FindPig());
+```
+
+### level order traversal
+
+```java
+void levelorderTraverse(BSTNode x) {
+    for (int i = 0; i < x.height; i++) {
+        visitLevel(x, i);
+    }
+}
+
+void visitLevel(BSTNode x, int level) {
+    if (T == null) return;
+    
+    if (level == 0) print(x.key);
+    else {
+        visitLevel(x.left, level - 1);
+        visitLevel(x.right, level - 1);
+    }
+}
+```
+
+#### tree height
+
+- difference between bushy and spindly trees
+
+  ![tree height](./../asset/tree_height.png "")
+
+## range finding
+
+#### geometric search
+
+```java
+public Set<Label> findInRange(Tree T, Label min, Label max) {
+    Set<Label> results = new Set<>();
+    rangeFindHelper(T, min, max, results);
+    return results;
+}
+
+private void rangeFindHelper(Tree T, Label min, Label max, Set<Label> s) {
+    if (T == null) return;
+    int cmpMin = min.compareTo(T.label);
+    int cmpMax = max.compareTo(T.label);
+    if (cmpMin < 0) {
+        rangeFindHelper(T.right, min, max, s);
+    } else if (cmpMax > 0) {
+        rangeFindHelper(T.left, min, max, s);
+    } else {
+        s.add(T.label);
+    }
+}
+```
+
+#### prune tree
+
+![tree pruning](./../asset/prune_tree.png "")
+
+#### spatial trees
+
+![spatial tree](./../asset/spatial_tree.png "")
+
+#### iterator
+
+```java
+private class preorderIterator implements Iterator<Label> {
+    Stack<Tree<Label>> s = new Stack<>();
+    public preorderIterator() {
+        s.push(Tree.this);
+    }
+    public boolean hasNext() {
+        return (!s.isEmpty());
+    }
+    
+    public Label next() {
+        Tree<Label> node = s.pop();
+        for (int i = 0; i < node.numOfChild(); i++) {
+            s.push(node.child(i));
+        }
+        return node.label;
+    }
+}
 ```
 
