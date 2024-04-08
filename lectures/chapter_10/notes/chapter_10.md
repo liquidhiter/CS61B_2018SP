@@ -66,3 +66,43 @@ public List<String> unharmoniousTexts(Sniffer sniffer, int M) {
 - advantages
     - easy to implement (compared with tress)
     - memory efficient (compared with trees)
+
+## Advanced Trees
+### traversals
+- depth first traversals
+    - preorder
+    - inorder
+    - postorder
+
+```java
+public void PreOrder(BSTNode x) {
+	if (x != null) {
+		print(x.key);
+		print(x.left);
+		print(x.right);
+	}
+}
+```
+
+```java
+public void InOrder(BSTNode x) {
+	if (x != null) {
+		print(x.left);
+		print(x.key);
+		print(x.right);
+	}
+}
+```
+
+```java
+public void PostOrder(BSTNode x) {
+  if (x != null) {
+    PostOrder(x.left);
+    PostOrder(x.right);
+    print(x.key);
+  }
+}
+```
+
+- application
+	- post-order traversal for calculating file sizes
